@@ -1,49 +1,39 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	_ "github.com/mattn/go-sqlite3"
 )
 
+var myApp fyne.App = app.New()
+var myWindow fyne.Window = myApp.NewWindow("Hello")
+
 func main() {
-	a := app.New()
 
-	w := a.NewWindow("Mini ERP - Add new Client")
-	w.Resize(fyne.NewSize(500, 500))
-
-	nameEntry := widget.NewEntry()
-	mobileEntry := widget.NewEntry()
+	myWindow.Resize(fyne.NewSize(500, 500))
 	emailEntry := widget.NewEntry()
-	addressEntry := widget.NewMultiLineEntry()
+	passwordEntry := widget.NewPasswordEntry()
 
-	name1 := widget.NewFormItem("Name", nameEntry)
-	mobile1 := widget.NewFormItem("Mobile", mobileEntry)
-	email1 := widget.NewFormItem("Email", emailEntry)
-	address1 := widget.NewFormItem("Address", addressEntry)
-	clientForm := widget.NewForm(name1, mobile1, email1, address1)
+	email := widget.NewFormItem("Name", emailEntry)
+	password := widget.NewFormItem("Password", passwordEntry)
+
+	clientForm := widget.NewForm(email, password)
 
 	clientForm.SubmitText = "Login"
 
 	clientForm.OnSubmit = func() {
-		name := nameEntry.Text
-		mobile := mobileEntry.Text
-		email := emailEntry.Text
-		address := addressEntry.Text
-
-		fmt.Println(name, mobile, email, address)
+		appEmail := "admin@abc.com"
+		appPass := "12345678"
+		if emailEntry.Text == appEmail || passwordEntry.Text == appPass {
+			ShowAnother(myApp)
+		}
 
 	}
 
-	w.SetContent(
-		container.NewGridWithColumns(1,
-			clientForm,
-		),
+	myWindow.SetContent(
+		container.NewVBox(clientForm),
 	)
-
-	w.ShowAndRun()
+	myWindow.ShowAndRun()
 }

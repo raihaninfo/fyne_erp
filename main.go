@@ -4,6 +4,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -22,18 +23,21 @@ func main() {
 	clientForm := widget.NewForm(email, password)
 
 	clientForm.SubmitText = "Login"
+	messageLabel := widget.NewLabel("")
 
 	clientForm.OnSubmit = func() {
 		appEmail := "admin@abc.com"
 		appPass := "12345678"
-		if emailEntry.Text == appEmail || passwordEntry.Text == appPass {
+		if emailEntry.Text == appEmail && passwordEntry.Text == appPass {
 			ShowAnother(myApp)
+		} else {
+			dialog.NewInformation("Confirmation", "email or passwor invalid", myWindow).Show()
 		}
 
 	}
 
 	myWindow.SetContent(
-		container.NewVBox(clientForm),
+		container.NewVBox(clientForm, messageLabel),
 	)
 	myWindow.ShowAndRun()
 }

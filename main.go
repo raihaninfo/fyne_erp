@@ -31,7 +31,7 @@ func main() {
 		if emailEntry.Text == appEmail && passwordEntry.Text == appPass {
 			ShowAnother(myApp)
 		} else {
-			dialog.NewInformation("Invalid", "Email or Passwor invalid", myWindow).Show()
+			dialog.NewInformation("Invalid Email or password", "Email or Passwor invalid", myWindow).Show()
 		}
 
 	}

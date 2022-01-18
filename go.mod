@@ -2,10 +2,7 @@ module github.com/raihaninfo/fyne_erp
 
 go 1.17
 
-require (
-	fyne.io/fyne/v2 v2.1.2
-	github.com/mattn/go-sqlite3 v1.14.10
-)
+require fyne.io/fyne/v2 v2.1.2
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

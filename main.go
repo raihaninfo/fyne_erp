@@ -12,7 +12,7 @@ import (
 )
 
 var myApp fyne.App = app.New()
-var myWindow fyne.Window = myApp.NewWindow("Hello")
+var myWindow fyne.Window = myApp.NewWindow("Mini ERP")
 
 var db *sql.DB
 var err error
@@ -22,8 +22,7 @@ func init() {
 }
 
 func main() {
-
-	myWindow.Resize(fyne.NewSize(500, 500))
+	myWindow.Resize(fyne.NewSize(800, 600))
 	emailEntry := widget.NewEntry()
 	passwordEntry := widget.NewPasswordEntry()
 

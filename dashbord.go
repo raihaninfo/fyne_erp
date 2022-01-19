@@ -15,7 +15,7 @@ func ShowDashbord(a fyne.App) {
 		ShowClient(myApp)
 	})
 	btn2 := widget.NewButton("All Client", func() {
-		ShowAllClient(myApp)
+		ShowData(myApp)
 	})
 
 	win.SetContent(

@@ -9,11 +9,6 @@ import (
 )
 
 func addClient(name, mobile, email, address string) (int64, error) {
-
-	//INSERT INTO client (name,mobile,email,address) VALUES("RAIHAN", "01672710028", "raihan@gmail.com", "Kustia");
-	//sql := fmt.Sprintf(`INSERT INTO client (name,mobile,email,address) VALUES("%s", "%s", "%s", "%s");`, name, mobile, email, address)
-	//fmt.Println(sql)
-
 	data := make(url.Values)
 	data.Set("table", "client")
 	data.Set("dbtype", "sqlite3")
@@ -30,4 +25,13 @@ func addClient(name, mobile, email, address string) (int64, error) {
 
 	fmt.Println("Successfully inserted", pid)
 	return pid, nil
+}
+
+func GetClient() []map[string]interface{} {
+	qs := "SELECT * FROM client;"
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		panic(err)
+	}
+	return rows
 }

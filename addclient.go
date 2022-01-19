@@ -34,7 +34,11 @@ func ShowClient(a fyne.App) {
 		email := emailEntry.Text
 		address := addressEntry.Text
 
-		fmt.Println(name, mobile, email, address)
+		id, err := addClient(name, mobile, email, address)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println(id)
 
 	}
 	win.SetContent(container.NewVBox(btnHead, clientForm))

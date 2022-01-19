@@ -26,10 +26,12 @@ func main() {
 	messageLabel := widget.NewLabel("")
 
 	clientForm.OnSubmit = func() {
-		appEmail := "admin@abc.com"
-		appPass := "12345678"
+		// appEmail := "admin@abc.com"
+		// appPass := "12345678"
+		appEmail := ""
+		appPass := ""
 		if emailEntry.Text == appEmail && passwordEntry.Text == appPass {
-			ShowAnother(myApp)
+			ShowDashbord(myApp)
 		} else {
 			dialog.NewInformation("Invalid Email or password", "Email or Passwor invalid", myWindow).Show()
 		}

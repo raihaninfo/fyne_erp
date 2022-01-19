@@ -4,13 +4,17 @@ import (
 	"fmt"
 
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
-func ShowAnother(a fyne.App) {
+func ShowClient(a fyne.App) {
 	// time.Sleep(time.Second * 5)
 
 	win := myWindow
+	btnHead := widget.NewButton("Dashbord", func() {
+		ShowDashbord(myApp)
+	})
 	nameEntry := widget.NewEntry()
 	mobileEntry := widget.NewEntry()
 	emailEntry := widget.NewEntry()
@@ -33,7 +37,7 @@ func ShowAnother(a fyne.App) {
 		fmt.Println(name, mobile, email, address)
 
 	}
-	win.SetContent(clientForm)
+	win.SetContent(container.NewVBox(btnHead, clientForm))
 
 	win.Show()
 

@@ -6,8 +6,6 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-// var data = [][]string{[]string{"top left", "top right"},
-// 	[]string{"bottom left", "bottom right"}}
 
 func processData() [][]string {
 	tableData := [][]string{
@@ -30,7 +28,7 @@ func processData() [][]string {
 
 func ShowData(a fyne.App) {
 	win := myWindow
-	btnHead := widget.NewButton("Back to Dashbord", func() {
+	btnHead := widget.NewButton("< Back to Dashbord", func() {
 		ShowDashbord(myApp)
 	})
 

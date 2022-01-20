@@ -6,6 +6,9 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+// var data = [][]string{[]string{"top left", "top right"},
+// 	[]string{"bottom left", "bottom right"}}
+
 func processData() [][]string {
 	tableData := [][]string{
 		{"Id", "Name", "Mobile", "Email", "Address"},
@@ -27,9 +30,13 @@ func processData() [][]string {
 
 func ShowData(a fyne.App) {
 	win := myWindow
-	btnHead := widget.NewButton("Dashbord", func() {
+	btnHead := widget.NewButton("Back to Dashbord", func() {
 		ShowDashbord(myApp)
 	})
+
+	btnHead.Resize(fyne.NewSize(200, 40))
+	btnHead.Move(fyne.NewPos(10, 0))
+
 	data := processData()
 	list := widget.NewTable(
 		func() (int, int) {
@@ -42,18 +49,15 @@ func ShowData(a fyne.App) {
 			o.(*widget.Label).SetText(data[i.Row][i.Col])
 		})
 
+	list.Resize(fyne.NewSize(1500, 800))
+	list.Move(fyne.NewPos(10, 50))
+
 	list.SetColumnWidth(0, 60.0)
 	list.SetColumnWidth(1, 150.0)
 	list.SetColumnWidth(3, 210.0)
 
 	myWindow.SetContent(
-		container.NewGridWithColumns(1,
-			container.NewGridWithColumns(1,
-				btnHead,
-			),
-			container.NewGridWithColumns(1,
-				list),
-		),
+		container.NewWithoutLayout(btnHead, list),
 	)
 	win.Show()
 }

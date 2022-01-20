@@ -9,12 +9,12 @@ import (
 )
 
 func ShowClient(a fyne.App) {
-	// time.Sleep(time.Second * 5)
 
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
 		ShowDashbord(myApp)
 	})
+
 	nameEntry := widget.NewEntry()
 	mobileEntry := widget.NewEntry()
 	emailEntry := widget.NewEntry()
@@ -33,6 +33,7 @@ func ShowClient(a fyne.App) {
 		mobile := mobileEntry.Text
 		email := emailEntry.Text
 		address := addressEntry.Text
+
 
 		id, err := addClient(name, mobile, email, address)
 		if err != nil {

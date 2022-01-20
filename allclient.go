@@ -2,6 +2,7 @@ package main
 
 import (
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -26,9 +27,9 @@ func processData() [][]string {
 
 func ShowData(a fyne.App) {
 	win := myWindow
-	// btnHead := widget.NewButton("Dashbord", func() {
-	// 	ShowDashbord(myApp)
-	// })
+	btnHead := widget.NewButton("Dashbord", func() {
+		ShowDashbord(myApp)
+	})
 	data := processData()
 	list := widget.NewTable(
 		func() (int, int) {
@@ -45,6 +46,14 @@ func ShowData(a fyne.App) {
 	list.SetColumnWidth(1, 150.0)
 	list.SetColumnWidth(3, 210.0)
 
-	myWindow.SetContent(list)
+	myWindow.SetContent(
+		container.NewGridWithColumns(1,
+			container.NewGridWithColumns(1,
+				btnHead,
+			),
+			container.NewGridWithColumns(1,
+				list),
+		),
+	)
 	win.Show()
 }

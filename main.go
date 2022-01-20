@@ -11,11 +11,12 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var myApp fyne.App = app.New()
-var myWindow fyne.Window = myApp.NewWindow("Mini ERP")
-
-var db *sql.DB
-var err error
+var (
+	myApp    fyne.App    = app.New()
+	myWindow fyne.Window = myApp.NewWindow("Mini ERP")
+	db       *sql.DB
+	err      error
+)
 
 func init() {
 	dbcon()
@@ -24,9 +25,12 @@ func init() {
 func main() {
 	myWindow.Resize(fyne.NewSize(800, 600))
 	emailEntry := widget.NewEntry()
-	passwordEntry := widget.NewPasswordEntry()
+	emailEntry.PlaceHolder = "Enter your email"
 
-	email := widget.NewFormItem("Name", emailEntry)
+	passwordEntry := widget.NewPasswordEntry()
+	passwordEntry.PlaceHolder = "Enter your password"
+
+	email := widget.NewFormItem("Email", emailEntry)
 	password := widget.NewFormItem("Password", passwordEntry)
 
 	clientForm := widget.NewForm(email, password)

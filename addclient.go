@@ -16,9 +16,13 @@ func ShowClient(a fyne.App) {
 	})
 
 	nameEntry := widget.NewEntry()
+	nameEntry.PlaceHolder = "Enter Client Name"
 	mobileEntry := widget.NewEntry()
+	mobileEntry.PlaceHolder = "Enter Client Mobile"
 	emailEntry := widget.NewEntry()
+	emailEntry.PlaceHolder = "Enter Client Email Address"
 	addressEntry := widget.NewMultiLineEntry()
+	addressEntry.PlaceHolder = "Enter Client Address"
 
 	name1 := widget.NewFormItem("Name", nameEntry)
 	mobile1 := widget.NewFormItem("Mobile", mobileEntry)
@@ -33,7 +37,6 @@ func ShowClient(a fyne.App) {
 		mobile := mobileEntry.Text
 		email := emailEntry.Text
 		address := addressEntry.Text
-
 
 		id, err := addClient(name, mobile, email, address)
 		if err != nil {

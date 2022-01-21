@@ -15,12 +15,11 @@ func processAllClientData() [][]string {
 	rows := GetClient()
 	for i := 0; i < len(rows); i++ {
 		var tempRow []string
-		// tempRow = append(tempRow, rows[i]["id"].(string))
 		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["id"]))
-		tempRow = append(tempRow, rows[i]["name"].(string))
-		tempRow = append(tempRow, rows[i]["mobile"].(string))
-		tempRow = append(tempRow, rows[i]["email"].(string))
-		tempRow = append(tempRow, rows[i]["address"].(string))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["name"]))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["mobile"]))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["email"]))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["address"]))
 
 		tableData = append(tableData, tempRow)
 	}

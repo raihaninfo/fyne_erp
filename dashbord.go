@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -12,7 +13,7 @@ import (
 func ShowDashbord(a fyne.App) {
 	win := myWindow
 
-	headLable := canvas.NewText("Welcome to MiniERP", color.RGBA{R: 13, G: 13, B: 235, A: 100})
+	headLable := canvas.NewText("Welcome to MiniERP", color.RGBA{R: 255, G: 0, B: 255, A: 100})
 	headLable.TextSize = 40
 
 	btn1 := widget.NewButton("Add New Client", func() {
@@ -21,17 +22,19 @@ func ShowDashbord(a fyne.App) {
 	btn2 := widget.NewButton("All Client", func() {
 		ShowData(myApp)
 	})
+	totalClient := processAllClientData()
+	totalClientCount := strconv.Itoa((len(totalClient) - 1))
 
 	card1 := widget.NewCard(
-		"Total Cleint 33",
-		"",
-		canvas.NewLine(color.Opaque),
+		"Total Cleint",
+		totalClientCount,
+		canvas.NewRectangle(color.Black),
 	)
 
 	card2 := widget.NewCard(
 		"Total Product 54",
 		"",
-		canvas.NewLine(color.Opaque),
+		canvas.NewImageFromFile("img/list_icon.png"),
 	)
 
 	card3 := widget.NewCard(
@@ -49,7 +52,6 @@ func ShowDashbord(a fyne.App) {
 				container.NewGridWithColumns(3,
 					container.NewVBox(btn1, btn2),
 					container.NewVBox(card1),
-
 					container.NewVBox(card3),
 				), container.NewGridWithColumns(3,
 					container.NewVBox(),

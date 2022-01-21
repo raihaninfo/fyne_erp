@@ -1,20 +1,22 @@
 package main
 
 import (
+	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
 
-
-func processData() [][]string {
+func processAllClientData() [][]string {
 	tableData := [][]string{
 		{"Id", "Name", "Mobile", "Email", "Address"},
 	}
 	rows := GetClient()
 	for i := 0; i < len(rows); i++ {
 		var tempRow []string
-		tempRow = append(tempRow, rows[i]["id"].(string))
+		// tempRow = append(tempRow, rows[i]["id"].(string))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["id"]))
 		tempRow = append(tempRow, rows[i]["name"].(string))
 		tempRow = append(tempRow, rows[i]["mobile"].(string))
 		tempRow = append(tempRow, rows[i]["email"].(string))
@@ -35,7 +37,7 @@ func ShowData(a fyne.App) {
 	btnHead.Resize(fyne.NewSize(200, 40))
 	btnHead.Move(fyne.NewPos(10, 0))
 
-	data := processData()
+	data := processAllClientData()
 	list := widget.NewTable(
 		func() (int, int) {
 			return len(data), len(data[0])

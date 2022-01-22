@@ -8,7 +8,7 @@ import (
 	"github.com/mateors/msql"
 )
 
-func addClient(name, mobile, email, address string) (int64, error) {
+func AddClient(name, mobile, email, address string) (int64, error) {
 	data := make(url.Values)
 	data.Set("table", "client")
 	data.Set("dbtype", "sqlite3")

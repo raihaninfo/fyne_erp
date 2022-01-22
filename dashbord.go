@@ -26,7 +26,7 @@ func ShowDashbord(a fyne.App) {
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))
 
 	card1 := widget.NewCard(
-		"Total Cleint",
+		"Total Client",
 		totalClientCount,
 		canvas.NewRectangle(color.Black),
 	)
@@ -38,7 +38,7 @@ func ShowDashbord(a fyne.App) {
 	)
 
 	card3 := widget.NewCard(
-		"Total Cleint 35",
+		"Total Client 35",
 		"",
 		canvas.NewLine(color.Opaque),
 	)

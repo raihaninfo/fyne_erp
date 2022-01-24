@@ -5,7 +5,6 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	_ "github.com/mattn/go-sqlite3"
@@ -35,12 +34,11 @@ func main() {
 	email := widget.NewFormItem("Email", emailEntry)
 	password := widget.NewFormItem("Password", passwordEntry)
 
-	clientForm := widget.NewForm(email, password)
+	loginForm := widget.NewForm(email, password)
 
-	clientForm.SubmitText = "Login"
-	messageLabel := widget.NewLabel("")
+	loginForm.SubmitText = "Login"
 
-	clientForm.OnSubmit = func() {
+	loginForm.OnSubmit = func() {
 		// appEmail := "admin@abc.com"
 		// appPass := "12345678"
 		appEmail := ""
@@ -54,7 +52,7 @@ func main() {
 	}
 
 	myWindow.SetContent(
-		container.NewVBox(clientForm, messageLabel),
+		loginForm,
 	)
 	myWindow.ShowAndRun()
 }

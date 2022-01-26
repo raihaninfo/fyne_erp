@@ -27,6 +27,25 @@ func AddClient(name, mobile, email, address string) (int64, error) {
 	return pid, nil
 }
 
+func AddProduct(item_name, price, warranty, warranty_period string) (int64, error) {
+	data := make(url.Values)
+	data.Set("table", "item")
+	data.Set("dbtype", "sqlite3")
+	data.Set("item_name", item_name)
+	data.Set("price", price)
+	data.Set("warranty", warranty)
+	data.Set("warranty_period", warranty_period)
+
+	pid, err := msql.InsertIntoAnyTable(data, db)
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+
+	fmt.Println("Successfully inserted", pid)
+	return pid, nil
+}
+
 func GetClient() []map[string]interface{} {
 	qs := "SELECT * FROM client;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)

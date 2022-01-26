@@ -14,7 +14,7 @@ func ShowDashbord(a fyne.App) {
 	win := myWindow
 
 	headLable := widget.NewLabel("Welcome to miniERP")
-	headLable.Resize(fyne.NewSize(3322,444))
+	headLable.Resize(fyne.NewSize(3322, 444))
 	// headLable.TextSize = 40
 	headLable.TextStyle.Monospace = true
 
@@ -23,6 +23,9 @@ func ShowDashbord(a fyne.App) {
 	})
 	btn2 := widget.NewButton("All Client", func() {
 		ShowData(myApp)
+	})
+	btn3 := widget.NewButton("Add Product", func() {
+		AddProduct(myApp)
 	})
 	totalClient := processAllClientData()
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))
@@ -52,7 +55,7 @@ func ShowDashbord(a fyne.App) {
 					container.NewCenter(headLable),
 				),
 				container.NewGridWithColumns(3,
-					container.NewVBox(btn1, btn2),
+					container.NewVBox(btn1, btn2, btn3),
 					container.NewVBox(card1),
 					container.NewVBox(card3),
 				), container.NewGridWithColumns(3,

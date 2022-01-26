@@ -14,35 +14,46 @@ func AddProduct(a fyne.App) {
 		ShowDashbord(myApp)
 	})
 
+	// product name entry
 	nameEntry := widget.NewEntry()
 	nameEntry.PlaceHolder = "Enter Product name"
 
+	// product price entry
 	priceEntry := widget.NewEntry()
 	priceEntry.PlaceHolder = "Enter Price"
 
-	warentyEntry := widget.NewCheck("yes or not", func(b bool) {})
+	// is warranty check
+	warrantyEntry := widget.NewCheck("Check if there is a warranty", func(b bool) {})
 
+	// warranty period
 	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "6 Month", "1 Year"}, func(s string) {
-		fmt.Println(s)
+
 	})
 
-	name1 := widget.NewFormItem("Product Name", nameEntry)
-	mobile1 := widget.NewFormItem("Product Price", priceEntry)
-	email1 := widget.NewFormItem("Product Warranty", warentyEntry)
-	address1 := widget.NewFormItem("Warranty Period", warrantyPeriod)
-	clientForm := widget.NewForm(name1, mobile1, email1, address1)
+	productName := widget.NewFormItem("Product Name", nameEntry)
+	productPrice := widget.NewFormItem("Product Price", priceEntry)
+	productWarranty := widget.NewFormItem("Product Warranty", warrantyEntry)
+	productWarrantyPeriod := widget.NewFormItem("Warranty Period", warrantyPeriod)
 
-	clientForm.SubmitText = "Add"
+	// product Form
+	productForm := widget.NewForm(productName, productPrice, productWarranty, productWarrantyPeriod)
 
-	clientForm.OnSubmit = func() {
+	// Submit Button Text
+	productForm.SubmitText = "Add"
+
+	// Submit logic
+	productForm.OnSubmit = func() {
 		name := nameEntry.Text
-		mobile := priceEntry.Text
-		email := warentyEntry.Text
+		price := priceEntry.Text
+		warranty := warrantyEntry.Checked
+		warrantyPeriod := warrantyPeriod.Selected
 
-		fmt.Println(name, mobile, email)
-
+		fmt.Println(name, price, warranty, warrantyPeriod)
 	}
-	win.SetContent(container.NewVBox(btnHead, clientForm))
 
+	// Set content
+	win.SetContent(container.NewVBox(btnHead, productForm))
+
+	// Show
 	win.Show()
 }

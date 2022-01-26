@@ -13,8 +13,10 @@ import (
 func ShowDashbord(a fyne.App) {
 	win := myWindow
 
-	headLable := canvas.NewText("Welcome to MiniERP", color.RGBA{R: 255, G: 0, B: 255, A: 100})
-	headLable.TextSize = 40
+	headLable := widget.NewLabel("Welcome to miniERP")
+	headLable.Resize(fyne.NewSize(3322,444))
+	// headLable.TextSize = 40
+	headLable.TextStyle.Monospace = true
 
 	btn1 := widget.NewButton("Add New Client", func() {
 		ShowClient(myApp)

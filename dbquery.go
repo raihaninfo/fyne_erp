@@ -72,3 +72,12 @@ func GetClient() []map[string]interface{} {
 	}
 	return rows
 }
+
+func GetProductGroup() []map[string]interface{} {
+	qs := "SELECT * FROM item_group;"
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		panic(err)
+	}
+	return rows
+}

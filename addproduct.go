@@ -8,6 +8,27 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+type itemGroup struct {
+	Group_name string
+	Group_dec  string
+}
+
+func processAllGroupData() [][]string {
+	tableData := [][]string{
+		{"Id", "Name", "Mobile", "Email", "Address"},
+	}
+	rows := GetProductGroup()
+	for i := 0; i < len(rows); i++ {
+		var tempRow []string
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["group_name"]))
+		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["description"]))
+
+		tableData = append(tableData, tempRow)
+	}
+
+	return tableData
+}
+
 func ShowProductAdd(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
@@ -31,15 +52,22 @@ func ShowProductAdd(a fyne.App) {
 	// warranty period
 	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "6 Month", "1 Year"}, func(s string) {
 
+	})	
+	jj:= processAllClientData()
+	groupEn := widget.NewSelect(jj, func(s string) {
+
 	})
+
+	
 
 	productName := widget.NewFormItem("Product Name", nameEntry)
 	productPrice := widget.NewFormItem("Product Price", priceEntry)
 	productWarranty := widget.NewFormItem("Product Warranty", warrantyEntry)
 	productWarrantyPeriod := widget.NewFormItem("Warranty Period", warrantyPeriod)
+	group := widget.NewFormItem("Warranty Period", groupEn)
 
 	// product Form
-	productForm := widget.NewForm(productName, productPrice, productWarranty, productWarrantyPeriod)
+	productForm := widget.NewForm(productName, productPrice, productWarranty, productWarrantyPeriod, group)
 
 	// Submit Button Text
 	productForm.SubmitText = "Add"

@@ -35,7 +35,10 @@ func ShowProductAdd(a fyne.App) {
 	priceEntry := widget.NewEntry()
 	priceEntry.PlaceHolder = "Enter Price"
 
+	// Product group data
 	allGroupData := processAllGroupData()
+
+	// group dropdown
 	groupEntry := widget.NewSelect(allGroupData, func(s string) {
 
 	})

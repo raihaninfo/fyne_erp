@@ -8,6 +8,7 @@ import (
 	"github.com/mateors/msql"
 )
 
+// client add query
 func AddClient(name, mobile, email, address string) (int64, error) {
 	data := make(url.Values)
 	data.Set("table", "client")
@@ -27,6 +28,7 @@ func AddClient(name, mobile, email, address string) (int64, error) {
 	return pid, nil
 }
 
+// product add query
 func AddProduct(item_name, item_group_id, price, warranty, warranty_period string) (int64, error) {
 	data := make(url.Values)
 	data.Set("table", "item")
@@ -47,6 +49,7 @@ func AddProduct(item_name, item_group_id, price, warranty, warranty_period strin
 	return pid, nil
 }
 
+// product group add query
 func AddProductGroup(group_name, description string) (int64, error) {
 	data := make(url.Values)
 	data.Set("table", "item_group")
@@ -64,6 +67,7 @@ func AddProductGroup(group_name, description string) (int64, error) {
 	return pid, nil
 }
 
+// get client query
 func GetClient() []map[string]interface{} {
 	qs := "SELECT * FROM client;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)
@@ -73,6 +77,7 @@ func GetClient() []map[string]interface{} {
 	return rows
 }
 
+// get product group query
 func GetProductGroup() []map[string]interface{} {
 	qs := "SELECT * FROM item_group;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)

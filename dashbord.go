@@ -13,7 +13,7 @@ import (
 
 func ShowDashbord(a fyne.App) {
 	win := myWindow
-	comName := "Mini ERP"
+	comName := "MT MART"
 	welcome := fmt.Sprintf("Welcome to %s", comName)
 	headLable := widget.NewCard(
 		welcome,

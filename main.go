@@ -12,7 +12,7 @@ import (
 
 var (
 	myApp    fyne.App    = app.New()
-	myWindow fyne.Window = myApp.NewWindow("Mini ERP")
+	myWindow fyne.Window = myApp.NewWindow("Mini ERP v0.0.1")
 	db       *sql.DB
 	err      error
 )
@@ -49,6 +49,10 @@ func main() {
 			dialog.NewInformation("Invalid Email or password", "Email or Passwor invalid", myWindow).Show()
 		}
 
+	}
+
+	loginForm.OnCancel = func() {
+		myWindow.Close()
 	}
 
 	myWindow.SetContent(

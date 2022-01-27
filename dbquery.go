@@ -27,11 +27,12 @@ func AddClient(name, mobile, email, address string) (int64, error) {
 	return pid, nil
 }
 
-func AddProduct(item_name, price, warranty, warranty_period string) (int64, error) {
+func AddProduct(item_name, item_group_id, price, warranty, warranty_period string) (int64, error) {
 	data := make(url.Values)
 	data.Set("table", "item")
 	data.Set("dbtype", "sqlite3")
 	data.Set("item_name", item_name)
+	data.Set("item_group_it", item_group_id)
 	data.Set("price", price)
 	data.Set("warranty", warranty)
 	data.Set("warranty_period", warranty_period)

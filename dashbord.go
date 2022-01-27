@@ -25,7 +25,7 @@ func ShowDashbord(a fyne.App) {
 		ShowData(myApp)
 	})
 	btn3 := widget.NewButton("Add Product", func() {
-		ShowProduct(myApp)
+		ShowProductAdd(myApp)
 	})
 	totalClient := processAllClientData()
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))

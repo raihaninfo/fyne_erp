@@ -8,10 +8,13 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func ShowProduct(a fyne.App) {
+func ShowProductAdd(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
 		ShowDashbord(myApp)
+	})
+	btnHead1 := widget.NewButton("Add Item GRUP", func() {
+		ShowAddGroupItem(myApp)
 	})
 
 	// product name entry
@@ -48,11 +51,18 @@ func ShowProduct(a fyne.App) {
 		warranty := warrantyEntry.Checked
 		warrantyPeriod := warrantyPeriod.Selected
 
+		isWarranty := "0"
+		if warranty {
+			isWarranty = "1"
+		}
+
+		AddProduct(name, "1", price, isWarranty, warrantyPeriod)
+
 		fmt.Println(name, price, warranty, warrantyPeriod)
 	}
 
 	// Set content
-	win.SetContent(container.NewVBox(btnHead, productForm))
+	win.SetContent(container.NewVBox(btnHead, btnHead1, productForm))
 
 	// Show
 	win.Show()

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 	"strconv"
 
@@ -12,11 +13,15 @@ import (
 
 func ShowDashbord(a fyne.App) {
 	win := myWindow
+	comName := "Mini ERP"
+	welcome := fmt.Sprintf("Welcome to %s", comName)
+	headLable := widget.NewCard(
+		welcome,
+		"2no gate sheikh farid market, ground floor, Nasirabad Chittagong",
+		widget.NewLabel("email@gmail.com, 01852-52525"),
+	)
 
-	headLable := widget.NewLabel("Welcome to miniERP")
-	headLable.Resize(fyne.NewSize(3322, 444))
 	// headLable.TextSize = 40
-	headLable.TextStyle.Monospace = true
 
 	btn1 := widget.NewButton("Add New Client", func() {
 		ShowClient(myApp)
@@ -27,7 +32,10 @@ func ShowDashbord(a fyne.App) {
 	btn3 := widget.NewButton("Add Product", func() {
 		ShowProductAdd(myApp)
 	})
-	
+	btn4 := widget.NewButton("Add Product Group", func() {
+		ShowProductAdd(myApp)
+	})
+
 	totalClient := processAllClientData()
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))
 
@@ -38,15 +46,9 @@ func ShowDashbord(a fyne.App) {
 	)
 
 	card2 := widget.NewCard(
-		"Total Product 54",
-		"",
-		canvas.NewImageFromFile("img/list_icon.png"),
-	)
-
-	card3 := widget.NewCard(
-		"Total Client 35",
-		"",
-		canvas.NewLine(color.Opaque),
+		"Total Product",
+		"12",
+		canvas.NewRectangle(color.White),
 	)
 
 	win.SetContent(
@@ -56,14 +58,13 @@ func ShowDashbord(a fyne.App) {
 					container.NewCenter(headLable),
 				),
 				container.NewGridWithColumns(3,
-					container.NewVBox(btn1, btn2, btn3),
-					container.NewVBox(card1),
-					container.NewVBox(card3),
-				), container.NewGridWithColumns(3,
-					container.NewVBox(),
+					container.NewVBox(btn1, btn2, btn3, btn4),
 					container.NewVBox(card1),
 					container.NewVBox(card2),
-				),
+				), container.NewGridWithColumns(3), // container.NewVBox(),
+				// container.NewVBox(),
+				// container.NewVBox(),
+
 			),
 		),
 	)

@@ -45,6 +45,7 @@ func ShowClient(a fyne.App) {
 		fmt.Println(id)
 
 	}
+	
 	win.SetContent(container.NewVBox(btnHead, clientForm))
 
 	win.Show()

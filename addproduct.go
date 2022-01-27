@@ -23,9 +23,6 @@ func ShowProductAdd(a fyne.App) {
 	btnHead := widget.NewButton("Dashbord", func() {
 		ShowDashbord(myApp)
 	})
-	btnHead1 := widget.NewButton("Add Item GRUP", func() {
-		ShowAddGroupItem(myApp)
-	})
 
 	// product name entry
 	nameEntry := widget.NewEntry()
@@ -47,7 +44,7 @@ func ShowProductAdd(a fyne.App) {
 	warrantyEntry := widget.NewCheck("Check if there is a warranty", func(b bool) {})
 
 	// warranty period
-	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "6 Month", "1 Year"}, func(s string) {
+	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "3 Month", "6 Month", "1 Year", "Life Time"}, func(s string) {
 
 	})
 
@@ -80,8 +77,14 @@ func ShowProductAdd(a fyne.App) {
 		fmt.Println(name, price, warranty, warrantyPeriod)
 	}
 
+	productForm.OnCancel = func() {
+		ShowDashbord(myApp)
+	}
+	productForm.CancelText = "Back"
+
+
 	// Set content
-	win.SetContent(container.NewVBox(btnHead, btnHead1, productForm))
+	win.SetContent(container.NewVBox(btnHead, productForm))
 
 	// Show
 	win.Show()

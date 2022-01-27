@@ -47,6 +47,23 @@ func AddProduct(item_name, item_group_id, price, warranty, warranty_period strin
 	return pid, nil
 }
 
+func AddProductGroup(group_name, description string) (int64, error) {
+	data := make(url.Values)
+	data.Set("table", "item_group")
+	data.Set("dbtype", "sqlite3")
+	data.Set("group_name", group_name)
+	data.Set("description", description)
+
+	pid, err := msql.InsertIntoAnyTable(data, db)
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+
+	fmt.Println("Successfully inserted", pid)
+	return pid, nil
+}
+
 func GetClient() []map[string]interface{} {
 	qs := "SELECT * FROM client;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)

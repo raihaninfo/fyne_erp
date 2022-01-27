@@ -38,7 +38,11 @@ func ShowAddGroupItem(a fyne.App) {
 	productForm.OnSubmit = func() {
 		product := productGroupNameEntry.Text
 		description := productDec.Text
-		fmt.Println(product, description)
+		id, err := AddProductGroup(product, description)
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println(id)
 	}
 
 	// Set content

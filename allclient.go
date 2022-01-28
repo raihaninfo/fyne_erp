@@ -33,6 +33,7 @@ func ShowData(a fyne.App) {
 		ShowDashbord(myApp)
 	})
 
+	// button resize
 	btnHead.Resize(fyne.NewSize(200, 40))
 	btnHead.Move(fyne.NewPos(10, 0))
 

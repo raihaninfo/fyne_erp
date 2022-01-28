@@ -17,6 +17,7 @@ var (
 	err      error
 )
 
+// Database connection.
 func init() {
 	dbcon()
 }

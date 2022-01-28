@@ -82,17 +82,22 @@ func GetProductGroup() []map[string]interface{} {
 	qs := "SELECT * FROM item_group;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
-		panic(err)
+		fmt.Println(err.Error())
 	}
 	return rows
 }
 
 // Get company info query
-func GetCompanyInfo() []map[string]interface{} {
-	qs := "SELECT * FROM company;"
+func GetCompanyInfo(website string) (map[string]interface{}, error) {
+	var row = make(map[string]interface{})
+	qs := `SELECT * FROM company WHERE website="%s";`
+	qs = fmt.Sprintf(qs, website)
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return rows
+	for _, srow := range rows {
+		row = srow
+	}
+	return row, nil
 }

@@ -11,33 +11,27 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func processCompanyInfo() []string {
-	tableData := []string{}
-	rows := GetCompanyInfo()
-	for i := 0; i < len(rows); i++ {
-		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["company_name"]))
-		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["address"]))
-		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["website"]))
-		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["email"]))
-		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["mobile"]))
-	}
-	return tableData
+func dataConveter(input interface{}) string {
+	return fmt.Sprintf("%v", input)
 }
 
 func ShowDashbord(a fyne.App) {
 	win := myWindow
-	comInfo := processCompanyInfo()
-	comName := comInfo[0]
-	comAddress := comInfo[1]
-	comWeb := comInfo[2]
-	comEmail := comInfo[3]
-	comMobile := comInfo[4]
+	comInfo, err := GetCompanyInfo("www.mtmart.com")
+	if err != nil {
+		fmt.Println(err)
+	}
+	comName := comInfo["company_name"]
+	comAddress := comInfo["address"]
+	comWeb := comInfo["website"]
+	comEmail := comInfo["email"]
+	comMobile := comInfo["mobile"]
 
 	welcome := fmt.Sprintf("Welcome to %s", comName)
 	onlineInfo := fmt.Sprintf("%s, %s, %s", comWeb, comEmail, comMobile)
 	headLable := widget.NewCard(
 		welcome,
-		comAddress,
+		dataConveter(comAddress),
 		widget.NewLabel(onlineInfo),
 	)
 

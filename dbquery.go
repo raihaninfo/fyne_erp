@@ -86,3 +86,12 @@ func GetProductGroup() []map[string]interface{} {
 	}
 	return rows
 }
+
+func GetCompanyInfo() []map[string]interface{} {
+	qs := "SELECT * FROM company;"
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		panic(err)
+	}
+	return rows
+}

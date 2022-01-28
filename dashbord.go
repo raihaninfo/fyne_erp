@@ -51,7 +51,7 @@ func ShowDashbord(a fyne.App) {
 		ShowProductAdd(myApp)
 	})
 	btn4 := widget.NewButton("Add Product Group", func() {
-		ShowProductAdd(myApp)
+		ShowAddGroupItem(myApp)
 	})
 
 	totalClient := processAllClientData()

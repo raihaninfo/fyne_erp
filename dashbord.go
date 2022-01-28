@@ -11,17 +11,35 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+func processCompanyInfo() []string {
+	tableData := []string{}
+	rows := GetCompanyInfo()
+	for i := 0; i < len(rows); i++ {
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["company_name"]))
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["address"]))
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["website"]))
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["email"]))
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["mobile"]))
+	}
+	return tableData
+}
+
 func ShowDashbord(a fyne.App) {
 	win := myWindow
-	comName := "MT MART"
+	comInfo := processCompanyInfo()
+	comName := comInfo[0]
+	comAddress := comInfo[1]
+	comWeb := comInfo[2]
+	comEmail := comInfo[3]
+	comMobile := comInfo[4]
+
 	welcome := fmt.Sprintf("Welcome to %s", comName)
+	onlineInfo := fmt.Sprintf("%s, %s, %s", comWeb, comEmail, comMobile)
 	headLable := widget.NewCard(
 		welcome,
-		"2no gate sheikh farid market, ground floor, Nasirabad Chittagong",
-		widget.NewLabel("email@gmail.com, 01852-52525"),
+		comAddress,
+		widget.NewLabel(onlineInfo),
 	)
-
-	// headLable.TextSize = 40
 
 	btn1 := widget.NewButton("Add New Client", func() {
 		ShowClient(myApp)

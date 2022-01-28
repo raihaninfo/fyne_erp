@@ -49,7 +49,7 @@ func ShowData(a fyne.App) {
 			o.(*widget.Label).SetText(data[i.Row][i.Col])
 		})
 
-	list.Resize(fyne.NewSize(1500, 800))
+	list.Resize(fyne.NewSize(800, 520))
 	list.Move(fyne.NewPos(10, 50))
 
 	list.SetColumnWidth(0, 60.0)

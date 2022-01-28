@@ -10,9 +10,11 @@ import (
 
 func processAllGroupData() []string {
 	tableData := []string{}
-	rows := GetProductGroup()
+	rows, err := GetProductGroup()
+	if err != nil {
+		fmt.Println(err)
+	}
 	for i := 0; i < len(rows); i++ {
-		// var tempRow []string
 		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["group_name"]))
 	}
 	return tableData
@@ -81,7 +83,6 @@ func ShowProductAdd(a fyne.App) {
 		ShowDashbord(myApp)
 	}
 	productForm.CancelText = "Back"
-
 
 	// Set content
 	win.SetContent(container.NewVBox(btnHead, productForm))

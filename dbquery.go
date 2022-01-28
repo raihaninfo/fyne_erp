@@ -62,29 +62,28 @@ func AddProductGroup(group_name, description string) (int64, error) {
 		log.Println(err)
 		return 0, err
 	}
-
 	fmt.Println("Successfully inserted", pid)
 	return pid, nil
 }
 
 // get client query
-func GetClient() []map[string]interface{} {
+func GetClient() ([]map[string]interface{}, error) {
 	qs := "SELECT * FROM client;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return rows
+	return rows, nil
 }
 
 // get product group query
-func GetProductGroup() []map[string]interface{} {
+func GetProductGroup() ([]map[string]interface{}, error) {
 	qs := "SELECT * FROM item_group;"
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
-		fmt.Println(err.Error())
+		return nil, err
 	}
-	return rows
+	return rows, nil
 }
 
 // Get company info query

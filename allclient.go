@@ -12,7 +12,10 @@ func processAllClientData() [][]string {
 	tableData := [][]string{
 		{"Id", "Name", "Mobile", "Email", "Address"},
 	}
-	rows := GetClient()
+	rows, err := GetClient()
+	if err != nil {
+		fmt.Println(err)
+	}
 	for i := 0; i < len(rows); i++ {
 		var tempRow []string
 		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["id"]))

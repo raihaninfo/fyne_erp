@@ -87,10 +87,10 @@ func GetProductGroup() ([]map[string]interface{}, error) {
 }
 
 // Get company info query
-func GetCompanyInfo(website string) (map[string]interface{}, error) {
+func GetCompanyInfo(id string) (map[string]interface{}, error) {
 	var row = make(map[string]interface{})
-	qs := `SELECT * FROM company WHERE website="%s";`
-	qs = fmt.Sprintf(qs, website)
+	qs := `SELECT * FROM company WHERE id="%s";`
+	qs = fmt.Sprintf(qs, id)
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
 		return nil, err
@@ -99,4 +99,15 @@ func GetCompanyInfo(website string) (map[string]interface{}, error) {
 		row = srow
 	}
 	return row, nil
+}
+
+// update company info
+
+func UpdateCompany() bool {
+	qs := `UPDATE company SET company_name = "MT MATR", address = "test address4", website= "www.test4.com", email="test4.gmail.com", mobile="045556565";`
+	e := msql.RawSQL(qs, db)
+	// if err!=nil{
+
+	// }
+	return e
 }

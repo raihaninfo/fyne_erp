@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/widget"
 )
 
-func CompanyInfo(a fyne.App) {
+func CompanyInfoUpdate(a fyne.App) {
 	win := a.NewWindow("Company Info")
 	win.Resize(fyne.NewSize(500, 400))
 	win.SetFixedSize(true)
@@ -26,7 +28,8 @@ func CompanyInfo(a fyne.App) {
 
 	updateCompanyInfo.SubmitText = "Update"
 	updateCompanyInfo.OnSubmit = func() {
-
+		jj := UpdateCompany()
+		fmt.Println(jj)
 	}
 
 	win.SetContent(updateCompanyInfo)

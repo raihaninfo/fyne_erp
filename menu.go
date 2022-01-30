@@ -19,7 +19,7 @@ func mainMenu() {
 		dialog.NewInformation("About", "Lorem Ipsum is simply dummy text of the printing\n and typesetting industry. Lorem Ipsum has been the industry's standard\n dummy text ever since the 1500s, ", myWindow).Show()
 	})
 	menuItem4 := fyne.NewMenuItem("Company Info", func() {
-		CompanyInfo(myApp)
+		CompanyInfoUpdate(myApp)
 	})
 
 	newMenu1 := fyne.NewMenu("File", menuItem3, menuItem4)

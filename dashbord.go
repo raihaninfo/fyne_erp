@@ -17,7 +17,7 @@ func dataConveter(input interface{}) string {
 
 func ShowDashbod(a fyne.App) {
 	win := myWindow
-	comInfo, err := GetCompanyInfo("www.mtmart.com")
+	comInfo, err := GetCompanyInfo("1")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -34,6 +34,7 @@ func ShowDashbod(a fyne.App) {
 		dataConveter(comAddress),
 		widget.NewLabel(onlineInfo),
 	)
+	headLable.Refresh()
 
 	btn1 := widget.NewButton("Add New Client", func() {
 		ShowClient(myApp)

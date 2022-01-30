@@ -11,7 +11,7 @@ import (
 func ShowAddGroupItem(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
-		ShowDashbord(myApp)
+		ShowDashbod(myApp)
 	})
 	btnHead1 := widget.NewButton("Add Product", func() {
 		ShowProductAdd(myApp)

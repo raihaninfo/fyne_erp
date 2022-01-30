@@ -15,7 +15,7 @@ func dataConveter(input interface{}) string {
 	return fmt.Sprintf("%v", input)
 }
 
-func ShowDashbord(a fyne.App) {
+func ShowDashbod(a fyne.App) {
 	win := myWindow
 	comInfo, err := GetCompanyInfo("www.mtmart.com")
 	if err != nil {

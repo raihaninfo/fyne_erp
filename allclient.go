@@ -33,7 +33,7 @@ func processAllClientData() [][]string {
 func ShowData(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("< Back to Dashbord", func() {
-		ShowDashbord(myApp)
+		ShowDashbod(myApp)
 	})
 
 	// button resize

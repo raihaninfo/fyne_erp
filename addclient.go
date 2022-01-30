@@ -12,7 +12,7 @@ func ShowClient(a fyne.App) {
 
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
-		ShowDashbord(myApp)
+		ShowDashbod(myApp)
 	})
 
 	nameEntry := widget.NewEntry()

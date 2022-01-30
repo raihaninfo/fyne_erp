@@ -23,7 +23,7 @@ func processAllGroupData() []string {
 func ShowProductAdd(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {
-		ShowDashbord(myApp)
+		ShowDashbod(myApp)
 	})
 
 	// product name entry
@@ -80,7 +80,7 @@ func ShowProductAdd(a fyne.App) {
 	}
 
 	productForm.OnCancel = func() {
-		ShowDashbord(myApp)
+		ShowDashbod(myApp)
 	}
 	productForm.CancelText = "Back"
 

@@ -105,9 +105,9 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 
 func UpdateCompany() bool {
 	qs := `UPDATE company SET company_name = "MT MATR", address = "test address4", website= "www.test4.com", email="test4.gmail.com", mobile="045556565";`
-	e := msql.RawSQL(qs, db)
+	row := msql.RawSQL(qs, db)
 	// if err!=nil{
 
 	// }
-	return e
+	return row
 }

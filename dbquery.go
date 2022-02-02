@@ -37,7 +37,7 @@ func AddProduct(item_name, item_group, price, warranty, warranty_period string) 
 	data.Set("item_group", item_group)
 	data.Set("price", price)
 	data.Set("warranty", warranty)
-	data.Set("warranty_period", warranty_period)
+	data.Set("warrant_period", warranty_period)
 
 	pid, err := msql.InsertIntoAnyTable(data, db)
 	if err != nil {

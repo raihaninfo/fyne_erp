@@ -76,6 +76,16 @@ func GetClient() ([]map[string]interface{}, error) {
 	return rows, nil
 }
 
+// Get all product
+func GetProduct() ([]map[string]interface{}, error) {
+	qs := "SELECT * FROM item;"
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		return nil, err
+	}
+	return rows, nil
+}
+
 // get product group query
 func GetProductGroup() ([]map[string]interface{}, error) {
 	qs := "SELECT * FROM item_group;"

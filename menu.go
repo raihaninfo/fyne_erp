@@ -16,7 +16,7 @@ func mainMenu() {
 		myApp.Settings().SetTheme(Dark)
 	})
 	menuItem3 := fyne.NewMenuItem("About", func() {
-		dialog.NewInformation("About", "Lorem Ipsum is simply dummy text of the printing\n and typesetting industry. Lorem Ipsum has been the industry's standard\n dummy text ever since the 1500s, ", myWindow).Show()
+		dialog.NewInformation("About", "This is simply dummy text of the printing\n and typesetting industry. dummy text has been the industry's standard\n dummy text ever since the 1500s, ", myWindow).Show()
 	})
 	menuItem4 := fyne.NewMenuItem("Company Info", func() {
 		CompanyInfoUpdate(myApp)

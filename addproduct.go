@@ -68,15 +68,18 @@ func ShowProductAdd(a fyne.App) {
 		price := priceEntry.Text
 		warranty := warrantyEntry.Checked
 		warrantyPeriod := warrantyPeriod.Selected
+		groupValue := groupEntry.Selected
 
 		isWarranty := "0"
 		if warranty {
 			isWarranty = "1"
 		}
+		fmt.Println(isWarranty)
+		fmt.Println(warrantyPeriod)
 
-		AddProduct(name, "1", price, isWarranty, warrantyPeriod)
+		AddProduct(name, groupValue, price, isWarranty, warrantyPeriod)
 
-		fmt.Println(name, price, warranty, warrantyPeriod)
+		fmt.Println(name, price, warranty, warrantyPeriod, groupValue)
 	}
 
 	productForm.OnCancel = func() {

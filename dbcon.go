@@ -11,7 +11,6 @@ func dbcon() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	db.SetMaxOpenConns(1)
 	log.Println("db connection successful")
 }

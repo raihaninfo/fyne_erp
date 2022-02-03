@@ -60,7 +60,8 @@ func ShowAllProduct(a fyne.App) {
 		},
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(data[i.Row][i.Col])
-		})
+		},
+	)
 
 	list.Resize(fyne.NewSize(800, 520))
 	list.Move(fyne.NewPos(10, 50))

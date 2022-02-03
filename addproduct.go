@@ -46,7 +46,7 @@ func ShowProductAdd(a fyne.App) {
 	warrantyEntry := widget.NewCheck("Check if there is a warranty", func(b bool) {})
 
 	// warranty period
-	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "3 Month", "6 Month", "1 Year", "Life Time"}, func(s string) {
+	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "3 Month", "6 Month", "1 Year", "2 Years", "Life Time"}, func(s string) {
 
 	})
 
@@ -74,7 +74,7 @@ func ShowProductAdd(a fyne.App) {
 		if warranty {
 			isWarranty = "1"
 		}
-	
+
 		fmt.Println(warrantyPeriod)
 
 		AddProduct(name, groupValue, price, isWarranty, warrantyPeriod)

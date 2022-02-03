@@ -113,11 +113,11 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 
 // update company info
 func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
-	name, err = isEmty(name, "company_name")
-	address, err = isEmty(address, "address")
-	website, err = isEmty(website, "website")
-	email, err = isEmty(email, "email")
-	mobile, err = isEmty(mobile, "mobile")
+	name, err = isEmpty(name, "company_name")
+	address, err = isEmpty(address, "address")
+	website, err = isEmpty(website, "website")
+	email, err = isEmpty(email, "email")
+	mobile, err = isEmpty(mobile, "mobile")
 	if err != nil {
 		fmt.Println(err)
 	}

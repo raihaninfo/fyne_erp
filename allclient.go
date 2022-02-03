@@ -18,11 +18,11 @@ func processAllClientData() [][]string {
 	}
 	for i := 0; i < len(rows); i++ {
 		var tempRow []string
-		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["id"]))
-		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["name"]))
-		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["mobile"]))
-		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["email"]))
-		tempRow = append(tempRow, fmt.Sprintf("%v", rows[i]["address"]))
+		tempRow = append(tempRow, dataConveter(rows[i]["id"]))
+		tempRow = append(tempRow, dataConveter(rows[i]["name"]))
+		tempRow = append(tempRow, dataConveter(rows[i]["mobile"]))
+		tempRow = append(tempRow, dataConveter(rows[i]["email"]))
+		tempRow = append(tempRow, dataConveter(rows[i]["address"]))
 
 		tableData = append(tableData, tempRow)
 	}

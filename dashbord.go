@@ -60,10 +60,11 @@ func ShowDashbod(a fyne.App) {
 		totalClientCount,
 		canvas.NewRectangle(color.Black),
 	)
-
+	totalProduct := processAllProductData()
+	totalProductCount := strconv.Itoa((len(totalProduct) - 1))
 	card2 := widget.NewCard(
 		"Total Product",
-		"12",
+		totalProductCount,
 		canvas.NewRectangle(color.White),
 	)
 

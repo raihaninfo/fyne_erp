@@ -113,11 +113,12 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 
 // update company info
 
-func UpdateCompany() bool {
-	qs := `UPDATE company SET company_name = "MT MATR", address = "test address4", website= "www.test4.com", email="test4.gmail.com", mobile="045556565";`
+func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
+	qs := `UPDATE company SET company_name = "%s", address = "%s", website= "%s", email="%s", mobile="%s";`
+	qs = fmt.Sprintf(qs, name, address, website, email, mobile)
 	row := msql.RawSQL(qs, db)
 	// if err!=nil{
 
 	// }
-	return row
+	return row, nil
 }

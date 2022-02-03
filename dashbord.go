@@ -49,7 +49,7 @@ func ShowDashbod(a fyne.App) {
 		ShowAllProduct(myApp)
 	})
 	btn6 := widget.NewButton("Invoice", func() {
-
+		InvoiceDash(myApp)
 	})
 
 	totalClient := processAllClientData()

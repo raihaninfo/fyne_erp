@@ -129,12 +129,11 @@ func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
 	address, err = isEmty(address, "address")
 	website, err = isEmty(website, "website")
 	email, err = isEmty(email, "email")
-	mobile, err= isEmty(mobile, "mobile")
-	if err!=nil{
+	mobile, err = isEmty(mobile, "mobile")
+	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(name, address, website, email, mobile)
 	qs := `UPDATE company SET company_name = "%s", address = "%s", website= "%s", email="%s", mobile="%s";`
 	qs = fmt.Sprintf(qs, name, address, website, email, mobile)
 	row := msql.RawSQL(qs, db)

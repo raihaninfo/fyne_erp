@@ -24,7 +24,7 @@ func init() {
 
 func main() {
 	myWindow.Resize(fyne.NewSize(800, 600))
-	mainMenu()
+	
 
 	emailEntry := widget.NewEntry()
 	emailEntry.PlaceHolder = "Enter your email"

@@ -16,6 +16,7 @@ func dataConveter(input interface{}) string {
 }
 
 func ShowDashbod(a fyne.App) {
+	mainMenu()
 	win := myWindow
 	comInfo, err := GetCompanyInfo("1")
 	if err != nil {

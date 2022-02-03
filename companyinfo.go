@@ -33,6 +33,7 @@ func CompanyInfoUpdate(a fyne.App) {
 		mobile := companyMobileEntry.Text
 		UpdateCompany(name, address, website, email, mobile)
 		// fmt.Println(name, address, website, email, mobile)
+		win.Close()
 
 	}
 

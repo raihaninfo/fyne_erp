@@ -111,18 +111,6 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 	return row, nil
 }
 
-func isEmty(item, value string) (string, error) {
-	companyInfo, err := GetCompanyInfo("1")
-	if err != nil {
-		fmt.Println(err)
-	}
-	if item == "" {
-		item = dataConveter(companyInfo[value])
-		// item = fmt.Sprintf(item, value)
-	}
-	return item, nil
-}
-
 // update company info
 func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
 	name, err = isEmty(name, "company_name")

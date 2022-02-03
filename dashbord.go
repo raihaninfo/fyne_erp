@@ -11,10 +11,6 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func dataConveter(input interface{}) string {
-	return fmt.Sprintf("%v", input)
-}
-
 func ShowDashbod(a fyne.App) {
 	mainMenu()
 	win := myWindow

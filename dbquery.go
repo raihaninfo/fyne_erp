@@ -111,14 +111,32 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 	return row, nil
 }
 
-// update company info
+func isEmty(item, value string) (string, error) {
+	companyInfo, err := GetCompanyInfo("1")
+	if err != nil {
+		fmt.Println(err)
+	}
+	if item == "" {
+		item = dataConveter(companyInfo[value])
+		// item = fmt.Sprintf(item, value)
+	}
+	return item, nil
+}
 
+// update company info
 func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
+	name, err = isEmty(name, "company_name")
+	address, err = isEmty(address, "address")
+	website, err = isEmty(website, "website")
+	email, err = isEmty(email, "email")
+	mobile, err= isEmty(mobile, "mobile")
+	if err!=nil{
+		fmt.Println(err)
+	}
+
+	fmt.Println(name, address, website, email, mobile)
 	qs := `UPDATE company SET company_name = "%s", address = "%s", website= "%s", email="%s", mobile="%s";`
 	qs = fmt.Sprintf(qs, name, address, website, email, mobile)
 	row := msql.RawSQL(qs, db)
-	// if err!=nil{
-
-	// }
 	return row, nil
 }

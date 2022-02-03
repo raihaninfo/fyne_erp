@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/widget"
 )
@@ -22,14 +20,20 @@ func CompanyInfoUpdate(a fyne.App) {
 	companyAddress := widget.NewFormItem("Address", companyAddressEntry)
 	companyWebsite := widget.NewFormItem("Website", companyWebsiteEntry)
 	companyEmail := widget.NewFormItem("Email", companyEmailEntry)
-	companyMobile := widget.NewFormItem("Email", companyMobileEntry)
+	companyMobile := widget.NewFormItem("Mobile", companyMobileEntry)
 
 	updateCompanyInfo := widget.NewForm(companyName, companyAddress, companyWebsite, companyEmail, companyMobile)
 
 	updateCompanyInfo.SubmitText = "Update"
 	updateCompanyInfo.OnSubmit = func() {
-		jj := UpdateCompany()
-		fmt.Println(jj)
+		name := companyNameEntry.Text
+		address := companyAddressEntry.Text
+		website := companyWebsiteEntry.Text
+		email := companyEmailEntry.Text
+		mobile := companyMobileEntry.Text
+		UpdateCompany(name, address, website, email, mobile)
+		// fmt.Println(name, address, website, email, mobile)
+
 	}
 
 	win.SetContent(updateCompanyInfo)

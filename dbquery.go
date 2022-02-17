@@ -127,3 +127,13 @@ func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
 	row := msql.RawSQL(qs, db)
 	return row, nil
 }
+
+func Search(search string) []map[string]interface{} {
+	// SELECT * FROM client WHERE name like 'rai%';
+	qs := fmt.Sprintf("SELECT * FROM client WHERE name LIKE '%s%%';", search)
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return rows
+}

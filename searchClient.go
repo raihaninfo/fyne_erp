@@ -14,30 +14,33 @@ func SearchClient(a fyne.App) {
 		ShowDashbod(myApp)
 	})
 	searchEntry := widget.NewEntry()
+	searchEntry.PlaceHolder = "Client Name"
 	SearchFil := widget.NewFormItem("", searchEntry)
 
 	Searchform := widget.NewForm(SearchFil)
-	var mainData [][]string
-	var list *widget.Table
-	searchEntry.OnChanged = func(s string) {
-		ll := searchEntry.Text
-		mainData = processClientSearchData(ll)
+	// var mainData [][]string
+	// var list *widget.Table
 
-		// data := processAllClientData()
-		data := processAllClientData()
+	searchEntry.OnChanged = func(s string) {
+		searchData := searchEntry.Text
+		mainData := processClientSearchData(searchData)
 		fmt.Println(mainData)
-		list = widget.NewTable(
-			func() (int, int) {
-				return len(data), len(data[0])
-			},
-			func() fyne.CanvasObject {
-				return widget.NewLabel("wide content")
-			},
-			func(i widget.TableCellID, o fyne.CanvasObject) {
-				o.(*widget.Label).SetText(data[i.Row][i.Col])
-			},
-		)
 	}
+
+	data := processAllClientData()
+	// fmt.Println(mainData)
+	list := widget.NewTable(
+		func() (int, int) {
+			return len(data), len(data[0])
+		},
+		func() fyne.CanvasObject {
+			return widget.NewLabel("wide content")
+		},
+		func(i widget.TableCellID, o fyne.CanvasObject) {
+			o.(*widget.Label).SetText(data[i.Row][i.Col])
+		},
+	)
+	
 
 	list.Resize(fyne.NewSize(800, 520))
 	list.Move(fyne.NewPos(10, 50))

@@ -12,7 +12,7 @@ func ShowAllProduct(a fyne.App) {
 		ShowDashbod(myApp)
 	})
 	searchEntry := widget.NewEntry()
-	searchEntry.PlaceHolder = "Client Name"
+	searchEntry.PlaceHolder = "Product Name"
 	SearchFil := widget.NewFormItem("", searchEntry)
 
 	Searchform := widget.NewForm(SearchFil)

@@ -47,7 +47,6 @@ func ShowAddGroupItem(a fyne.App) {
 
 	// Set content
 	win.SetContent(container.NewVBox(btnHead, btnHead1, productForm))
-
 	// Show
 	win.Show()
 }

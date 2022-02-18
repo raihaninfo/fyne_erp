@@ -14,7 +14,6 @@ func ShowAllProduct(a fyne.App) {
 	searchEntry := widget.NewEntry()
 	searchEntry.PlaceHolder = "Product Name"
 	SearchFil := widget.NewFormItem("Search", searchEntry)
-
 	Searchform := widget.NewForm(SearchFil)
 
 	// button resize

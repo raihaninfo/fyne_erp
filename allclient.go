@@ -13,28 +13,29 @@ func ShowData(a fyne.App) {
 	})
 	searchEntry := widget.NewEntry()
 	searchEntry.PlaceHolder = "Client Name"
-	SearchFil := widget.NewFormItem("Search", searchEntry)
+	searchFil := widget.NewFormItem("Search", searchEntry)
 
-	Searchform := widget.NewForm(SearchFil)
+	searchform := widget.NewForm(searchFil)
 
 	// button resize
 	btnHead.Resize(fyne.NewSize(200, 40))
 	btnHead.Move(fyne.NewPos(10, 0))
 
-	Searchform.Resize(fyne.NewSize(200, 700))
-	Searchform.Move(fyne.NewPos(550, 0))
+	searchform.Resize(fyne.NewSize(200, 700))
+	searchform.Move(fyne.NewPos(550, 0))
+
 	searchEntry.OnChanged = func(s string) {
 		mainData := processClientSearchData(s)
-		ShowDataOnList(mainData, btnHead, Searchform)
+		ShowDataOnList(mainData, btnHead, searchform)
 
 	}
 
 	data := processAllClientData()
-	ShowDataOnList(data, btnHead, Searchform)
+	ShowDataOnList(data, btnHead, searchform)
 	win.Show()
 }
 
-func ShowDataOnList(mainData [][]string, btnHead *widget.Button, Searchform *widget.Form) {
+func ShowDataOnList(mainData [][]string, btnHead *widget.Button, searchform *widget.Form) {
 	list := widget.NewTable(
 		func() (int, int) {
 			return len(mainData), len(mainData[0])
@@ -56,6 +57,6 @@ func ShowDataOnList(mainData [][]string, btnHead *widget.Button, Searchform *wid
 
 	list.Refresh()
 	myWindow.SetContent(
-		container.NewWithoutLayout(btnHead, Searchform, list),
+		container.NewWithoutLayout(btnHead, searchform, list),
 	)
 }

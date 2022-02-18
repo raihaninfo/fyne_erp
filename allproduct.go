@@ -13,7 +13,7 @@ func ShowAllProduct(a fyne.App) {
 	})
 	searchEntry := widget.NewEntry()
 	searchEntry.PlaceHolder = "Product Name"
-	SearchFil := widget.NewFormItem("", searchEntry)
+	SearchFil := widget.NewFormItem("Search", searchEntry)
 
 	Searchform := widget.NewForm(SearchFil)
 
@@ -21,8 +21,8 @@ func ShowAllProduct(a fyne.App) {
 	btnHead.Resize(fyne.NewSize(200, 40))
 	btnHead.Move(fyne.NewPos(10, 0))
 
-	Searchform.Resize(fyne.NewSize(200, 400))
-	Searchform.Move(fyne.NewPos(300, 0))
+	Searchform.Resize(fyne.NewSize(200, 700))
+	Searchform.Move(fyne.NewPos(550, 0))
 	searchEntry.OnChanged = func(s string) {
 		mainData := processProductSearchData(s)
 		ShowProductDataOnList(mainData, btnHead, Searchform)

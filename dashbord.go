@@ -45,7 +45,7 @@ func ShowDashbod(a fyne.App) {
 	btn4 := widget.NewButton("Add Product Group", func() {
 		ShowAddGroupItem(myApp)
 	})
-	btn5 := widget.NewButton("Show All Product", func() {
+	btn5 := widget.NewButton("All Product", func() {
 		ShowAllProduct(myApp)
 	})
 	btn6 := widget.NewButton("Invoice", func() {

@@ -1,65 +1,49 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
-
-func processAllProductData() [][]string {
-	tableData := [][]string{
-		{"Id", "Product Name", "Group", "Price", "warranty", "warranty Period"},
-	}
-	rows, err := GetProduct()
-	if err != nil {
-		fmt.Println(err)
-	}
-	for i := 0; i < len(rows); i++ {
-		var tempRow []string
-
-		warranty := dataConveter(rows[i]["warranty"])
-		var isWarranty string
-		if warranty == "0" {
-			isWarranty = "NO"
-		} else {
-			isWarranty = "YES"
-		}
-
-		tempRow = append(tempRow, dataConveter(rows[i]["id"]))
-		tempRow = append(tempRow, dataConveter(rows[i]["item_name"]))
-		tempRow = append(tempRow, dataConveter(rows[i]["item_group"]))
-		tempRow = append(tempRow, dataConveter(rows[i]["price"]))
-		tempRow = append(tempRow, isWarranty)
-		tempRow = append(tempRow, dataConveter(rows[i]["warrant_period"]))
-
-		tableData = append(tableData, tempRow)
-	}
-
-	return tableData
-}
 
 func ShowAllProduct(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("< Back to Dashbord", func() {
 		ShowDashbod(myApp)
 	})
+	searchEntry := widget.NewEntry()
+	searchEntry.PlaceHolder = "Client Name"
+	SearchFil := widget.NewFormItem("", searchEntry)
+
+	Searchform := widget.NewForm(SearchFil)
 
 	// button resize
 	btnHead.Resize(fyne.NewSize(200, 40))
 	btnHead.Move(fyne.NewPos(10, 0))
 
+	Searchform.Resize(fyne.NewSize(200, 400))
+	Searchform.Move(fyne.NewPos(300, 0))
+	searchEntry.OnChanged = func(s string) {
+		mainData := processProductSearchData(s)
+		ShowProductDataOnList(mainData, btnHead, Searchform)
+
+	}
+
 	data := processAllProductData()
+	ShowDataOnList(data, btnHead, Searchform)
+	win.Show()
+}
+
+func ShowProductDataOnList(mainData [][]string, btnHead *widget.Button, Searchform *widget.Form) {
 	list := widget.NewTable(
 		func() (int, int) {
-			return len(data), len(data[0])
+			return len(mainData), len(mainData[0])
 		},
 		func() fyne.CanvasObject {
 			return widget.NewLabel("wide content")
 		},
 		func(i widget.TableCellID, o fyne.CanvasObject) {
-			o.(*widget.Label).SetText(data[i.Row][i.Col])
+			o.(*widget.Label).SetText(mainData[i.Row][i.Col])
 		},
 	)
 
@@ -67,11 +51,11 @@ func ShowAllProduct(a fyne.App) {
 	list.Move(fyne.NewPos(10, 50))
 
 	list.SetColumnWidth(0, 60.0)
-	list.SetColumnWidth(1, 200.0)
-	list.SetColumnWidth(3, 100.0)
+	list.SetColumnWidth(1, 150.0)
+	list.SetColumnWidth(3, 210.0)
 
+	list.Refresh()
 	myWindow.SetContent(
-		container.NewWithoutLayout(btnHead, list),
+		container.NewWithoutLayout(btnHead, Searchform, list),
 	)
-	win.Show()
 }

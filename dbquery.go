@@ -128,9 +128,8 @@ func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
 	return row, nil
 }
 
-func Search(search string) []map[string]interface{} {
-	// SELECT * FROM client WHERE name like 'rai%';
-	qs := fmt.Sprintf("SELECT * FROM client WHERE name LIKE '%s%%';", search)
+func Search(search, table, searchBy string) []map[string]interface{} {
+	qs := fmt.Sprintf("SELECT * FROM %s WHERE %s LIKE '%s%%';", table,searchBy, search)
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
 		fmt.Println(err)

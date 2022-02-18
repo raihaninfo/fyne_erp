@@ -51,9 +51,7 @@ func ShowDashbod(a fyne.App) {
 	btn6 := widget.NewButton("Invoice", func() {
 		InvoiceDash(myApp)
 	})
-	btn7:= widget.NewButton("Search Client", func() {
-		SearchClient(myApp)
-	})
+
 	totalClient := processAllClientData()
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))
 
@@ -76,7 +74,7 @@ func ShowDashbod(a fyne.App) {
 				container.NewCenter(headLable),
 			),
 			container.NewGridWithColumns(3,
-				container.NewVBox(btn1, btn2,btn7, btn3, btn4, btn5, btn6),
+				container.NewVBox(btn1, btn2, btn3, btn4, btn5, btn6),
 				container.NewVBox(card1),
 				container.NewVBox(card2),
 			),

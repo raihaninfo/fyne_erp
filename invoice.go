@@ -55,9 +55,9 @@ func CreateInvoice(a fyne.App) {
 	list.Resize(fyne.NewSize(myWindow.Canvas().Size().Width, myWindow.Canvas().Size().Height-250))
 	list.Move(fyne.NewPos(0, 100))
 
-	// list.SetColumnWidth(0, 60.0)
-	// list.SetColumnWidth(1, 150.0)
-	// list.SetColumnWidth(3, 210.0)
+	list.SetColumnWidth(0, 150.0)
+	list.SetColumnWidth(1, 50.0)
+	list.SetColumnWidth(3, 210.0)
 
 	// widget.NewEntry().Validate()
 

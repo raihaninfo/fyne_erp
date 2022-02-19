@@ -13,7 +13,7 @@ func InvoiceDash(a fyne.App) {
 		ShowDashbod(myApp)
 	})
 	btn2 := widget.NewButton("Create Invoice", func() {
-
+		CreateInvoice(myApp)
 	})
 
 	win.SetContent(

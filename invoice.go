@@ -10,12 +10,17 @@ import (
 )
 
 func CreateInvoice(a fyne.App) {
-	win := myWindow
-	input := widget.NewSelectEntry([]string{"Raihan", "Rezaul"})
+	clientName := GetClientName()
+
+	input := widget.NewSelect(clientName, func(s string) {
+
+	})
 	input.Resize(fyne.NewSize(myWindow.Canvas().Size().Width, 40))
 	input.Move(fyne.NewPos(0, 0))
 
-	in1 := widget.NewSelect([]string{"Mango", "Apple"}, func(s string) {
+	productName := GetProductName()
+
+	in1 := widget.NewSelect(productName, func(s string) {
 
 	})
 
@@ -25,20 +30,32 @@ func CreateInvoice(a fyne.App) {
 	in2 := widget.NewEntry()
 	in2.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/2.5, 40))
 	in2.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5+5, 50))
+	var btn *widget.Button
+	btn = widget.NewButton("Add", func() {
+		productName := in1.Selected
+		qt := in2.Text
+		fmt.Println(productName, qt)
 
-	btn := widget.NewButton("Add", func() {
-		a := in1.Selected
-		b := in2.Text
-		fmt.Println(a, b)
+		priceMap := GetPrice(productName)
+		productPrice := priceMap[0]["price"]
+		fmt.Println(productPrice)
 
+		var mainData = [][]string{[]string{"Product", "QT", "Price"},
+			[]string{"Mi Note 92 Pro", "12", "12000"}, []string{"Iphone 12 pro max", "1", "12000"}}
+
+		showInvoiceDataOnList(mainData, input, in1, in2, btn)
 	})
 	btn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	btn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, 50))
-
+	var mainData = [][]string{[]string{},
+		[]string{}}
+	showInvoiceDataOnList(mainData, input, in1, in2, btn)
 	btn.Icon = theme.ContentAddIcon()
 
-	var mainData = [][]string{[]string{"Product", "QT", "Price"},
-		[]string{"Mi Note 9 Pro", "1", "12000"}}
+	myWindow.Show()
+}
+
+func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button) {
 
 	list := widget.NewTable(
 		func() (int, int) {
@@ -61,8 +78,7 @@ func CreateInvoice(a fyne.App) {
 
 	// widget.NewEntry().Validate()
 
-	win.SetContent(
+	myWindow.SetContent(
 		container.NewWithoutLayout(input, in1, in2, btn, list),
 	)
-	myWindow.Show()
 }

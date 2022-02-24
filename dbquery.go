@@ -129,10 +129,44 @@ func UpdateCompany(name, address, website, email, mobile string) (bool, error) {
 }
 
 func Search(search, table, searchBy string) []map[string]interface{} {
-	qs := fmt.Sprintf("SELECT * FROM %s WHERE %s LIKE '%s%%';", table,searchBy, search)
+	qs := fmt.Sprintf("SELECT * FROM %s WHERE %s LIKE '%s%%';", table, searchBy, search)
 	rows, err := msql.GetAllRowsByQuery(qs, db)
 	if err != nil {
 		fmt.Println(err)
 	}
 	return rows
+}
+
+func GetPrice(item_name string) []map[string]interface{} {
+	// SELECT price FROM item WHERE item_name="Mi Note 9 Pro";
+	qs := fmt.Sprintf("SELECT price FROM item WHERE item_name='%s';", item_name)
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return rows
+}
+
+func GetProductName() []string {
+	tableData := []string{}
+	rows, err := GetProduct()
+	if err != nil {
+		fmt.Println(err)
+	}
+	for i := 0; i < len(rows); i++ {
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["item_name"]))
+	}
+	return tableData
+}
+
+func GetClientName() []string {
+	tableData := []string{}
+	rows, err := GetClient()
+	if err != nil {
+		fmt.Println(err)
+	}
+	for i := 0; i < len(rows); i++ {
+		tableData = append(tableData, fmt.Sprintf("%v", rows[i]["name"]))
+	}
+	return tableData
 }

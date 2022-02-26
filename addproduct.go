@@ -8,8 +8,6 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-
-
 func ShowProductAdd(a fyne.App) {
 	win := myWindow
 	btnHead := widget.NewButton("Dashbord", func() {

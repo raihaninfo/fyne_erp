@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
+
+var mainData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
 
 func CreateInvoice(a fyne.App) {
 	clientName := GetClientName()
@@ -31,6 +34,7 @@ func CreateInvoice(a fyne.App) {
 	in2.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/2.5, 40))
 	in2.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5+5, 50))
 	var btn *widget.Button
+
 	btn = widget.NewButton("Add", func() {
 		productName := in1.Selected
 		qt := in2.Text
@@ -38,17 +42,26 @@ func CreateInvoice(a fyne.App) {
 
 		priceMap := GetPrice(productName)
 		productPrice := priceMap[0]["price"]
-		fmt.Println(productPrice)
+		// fmt.Println(productPrice)
 
-		var mainData = [][]string{[]string{"Product", "QT", "Price"},
-			[]string{"Mi Note 92 Pro", "12", "12000"}, []string{"Iphone 12 pro max", "1", "12000"}}
+		// pdPrice := productPrice.(string)
+		pdPrice := fmt.Sprintf("%v", productPrice)
+
+		priceInt, _ := strconv.ParseFloat(pdPrice, 64)
+		qtInt, _ := strconv.ParseFloat(qt, 64)
+		total := priceInt * qtInt
+
+		singleData := []string{productName, qt, pdPrice, fmt.Sprintf("%.0f", total)}
+		mainData = append(mainData, singleData)
+
+		// var mainData = [][]string{singleData}
 
 		showInvoiceDataOnList(mainData, input, in1, in2, btn)
 	})
+
 	btn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	btn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, 50))
-	var mainData = [][]string{[]string{},
-		[]string{}}
+
 	showInvoiceDataOnList(mainData, input, in1, in2, btn)
 	btn.Icon = theme.ContentAddIcon()
 
@@ -56,6 +69,8 @@ func CreateInvoice(a fyne.App) {
 }
 
 func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button) {
+
+	// exData := [][]string{}
 
 	list := widget.NewTable(
 		func() (int, int) {
@@ -77,7 +92,7 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	list.SetColumnWidth(3, 210.0)
 
 	// widget.NewEntry().Validate()
-
+	ShowInvoice()
 	myWindow.SetContent(
 		container.NewWithoutLayout(input, in1, in2, btn, list),
 	)

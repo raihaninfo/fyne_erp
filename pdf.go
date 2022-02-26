@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"math/rand"
 	"strconv"
 
 	"github.com/jung-kurt/gofpdf"
@@ -12,10 +11,9 @@ import (
 const (
 	bannerHt = 94.0
 	xIndent  = 40.0
-	taxRate  = 0.09
 )
 
-var discount float64 = 20.0
+var discount float64 = 20
 
 type LineItem struct {
 	UnitName       string
@@ -23,9 +21,10 @@ type LineItem struct {
 	UnitsPurchased int
 }
 
+var subtotal float64
+
 func ShowInvoice() {
 	var lineItems []LineItem
-	var subtotal float64
 	for i := 1; i < len(mainData); i++ {
 
 		price, _ := strconv.ParseFloat(mainData[i][2], 32)
@@ -37,7 +36,6 @@ func ShowInvoice() {
 		}
 		lineItems = append(lineItems, tmp)
 		subtotal += price * float64(qty)
-		fmt.Println(subtotal)
 	}
 
 	total := subtotal - discount
@@ -148,7 +146,8 @@ func ShowInvoice() {
 	_, _ = trailerLine(pdf, x, y, "Total", total)
 
 	pathPrifix, _ := CreateFolderUseingDate()
-	rand := rand.Intn(99999)
+	// rand := rand.Intn(99999)
+	rand := "jjj"
 	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrifix, rand)
 
 	err := pdf.OutputFileAndClose(folderPath)

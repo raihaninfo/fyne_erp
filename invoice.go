@@ -69,6 +69,9 @@ func CreateInvoice(a fyne.App) {
 	myWindow.Show()
 }
 
+var totalLabel *widget.Label
+var lsd float64
+
 func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button) {
 	list := widget.NewTable(
 		func() (int, int) {
@@ -85,19 +88,44 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	list.Resize(fyne.NewSize(myWindow.Canvas().Size().Width, myWindow.Canvas().Size().Height-250))
 	list.Move(fyne.NewPos(0, 100))
 
-	list.SetColumnWidth(0, 150.0)
+	list.SetColumnWidth(0, 230.0)
 	list.SetColumnWidth(1, 50.0)
 	list.SetColumnWidth(3, 210.0)
 
-	disLabel := widget.NewLabel("Discount = 500")
-	disLabel.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
-	disLabel.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-130))
+	dis := widget.NewEntry()
+	dis.PlaceHolder = "Discount Amount"
+	dis.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/4, 40))
+	dis.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-120))
 
-	totalLabel := widget.NewLabel("Total = 500")
+	disco := fmt.Sprintf("Discount = %v", lsd)
+	disLabel := widget.NewLabel(disco)
+	disLabel.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 10))
+	disLabel.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5, myWindow.Canvas().Size().Height-130))
+
+	var discountAmount float64
+	var totalAmount float64
+
+	for i := 1; i < len(mainData); i++ {
+		price, _ := strconv.ParseFloat(mainData[i][3], 32)
+		totalAmount += price
+	}
+
+	dis.OnChanged = func(s string) {
+		am, _ := strconv.ParseFloat(s, 32)
+		lsd = am
+
+	}
+	subtotalForm := fmt.Sprintf("Total = %.0f", totalAmount-discountAmount)
+
+	fmt.Println(discountAmount)
+
+	totalLabel = widget.NewLabel(subtotalForm)
+	totalLabel.Refresh()
+
 	totalLabel.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
-	totalLabel.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-100))
+	totalLabel.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5, myWindow.Canvas().Size().Height-100))
 	ShowInvoice()
 	myWindow.SetContent(
-		container.NewWithoutLayout(input, in1, in2, btn, list, disLabel, totalLabel),
+		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel),
 	)
 }

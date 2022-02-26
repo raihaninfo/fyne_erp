@@ -64,10 +64,7 @@ func ShowProductAdd(a fyne.App) {
 		}
 
 		fmt.Println(warrantyPeriod)
-
 		AddProduct(name, groupValue, price, isWarranty, warrantyPeriod)
-
-		// fmt.Println(name, price, warranty, warrantyPeriod, groupValue)
 	}
 
 	productForm.OnCancel = func() {
@@ -75,9 +72,6 @@ func ShowProductAdd(a fyne.App) {
 	}
 	productForm.CancelText = "Back"
 
-	// Set content
 	win.SetContent(container.NewVBox(btnHead, productForm))
-
-	// Show
 	win.Show()
 }

@@ -6,6 +6,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -36,11 +37,8 @@ func CreateInvoice(a fyne.App) {
 	btn = widget.NewButton("Add", func() {
 		productName := in1.Selected
 		qt := in2.Text
-		if qt == "" {
-			qt = "1"
-		}
 
-		if len(productName) > 0 {
+		if len(productName) > 0 && len(qt) > 0 {
 			priceMap := GetPrice(productName)
 			productPrice := priceMap[0]["price"]
 			pdPrice := fmt.Sprintf("%v", productPrice)
@@ -53,7 +51,12 @@ func CreateInvoice(a fyne.App) {
 			mainData = append(mainData, singleData)
 
 			showInvoiceDataOnList(mainData, input, in1, in2, btn)
+		} else {
+			dialog.NewInformation("Warning!", "Please Check Product and quantity", myWindow).Show()
 		}
+		in1.ClearSelected()
+		in2.Text = ""
+		in2.Refresh()
 
 	})
 
@@ -93,7 +96,7 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	totalLabel := widget.NewLabel("Total = 500")
 	totalLabel.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	totalLabel.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-100))
-
+	ShowInvoice()
 	myWindow.SetContent(
 		container.NewWithoutLayout(input, in1, in2, btn, list, disLabel, totalLabel),
 	)

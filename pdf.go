@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/rand"
 	"strconv"
 
 	"github.com/jung-kurt/gofpdf"
@@ -146,7 +147,11 @@ func ShowInvoice() {
 	y = y + lineHt*0.5
 	_, _ = trailerLine(pdf, x, y, "Total", total)
 
-	err := pdf.OutputFileAndClose("miniERP.pdf")
+	pathPrifix, _ := CreateFolderUseingDate()
+	rand := rand.Intn(99999)
+	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrifix, rand)
+
+	err := pdf.OutputFileAndClose(folderPath)
 	if err != nil {
 		panic(err)
 	}

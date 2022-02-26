@@ -24,8 +24,6 @@ func init() {
 
 func main() {
 	myWindow.Resize(fyne.NewSize(800, 600))
-	
-
 	emailEntry := widget.NewEntry()
 	emailEntry.PlaceHolder = "Enter your email"
 
@@ -55,7 +53,6 @@ func main() {
 	loginForm.OnCancel = func() {
 		myWindow.Close()
 	}
-
 	myWindow.SetContent(
 		loginForm,
 	)

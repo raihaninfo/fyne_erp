@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"time"
 
 	"github.com/jung-kurt/gofpdf"
 )
@@ -13,7 +14,7 @@ const (
 	xIndent  = 40.0
 )
 
-var discount float64 = 20
+var discount float64
 
 type LineItem struct {
 	UnitName       string
@@ -22,8 +23,18 @@ type LineItem struct {
 }
 
 var subtotal float64
+var customerName string
+
+// var clientAddress string
 
 func ShowInvoice() {
+	customerName = input.Selected
+
+	address := GetClientAddress(customerName)
+	clientAddress := fmt.Sprintf("%v", address[0]["address"])
+
+	discount = formDiscount
+	fmt.Println(formDiscount)
 	var lineItems []LineItem
 	for i := 1; i < len(mainData); i++ {
 
@@ -87,9 +98,12 @@ func ShowInvoice() {
 	pdf.MultiCell(124.0, lineHt*1.5, "2no gate Nasirabad,\n86/26 Sheikh Farid Market,Ground Floor.\n Chittagong.", gofpdf.BorderNone, gofpdf.AlignRight, false)
 
 	// Summary - Billed To, Invoice #, Date of Issue
-	_, sy := summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Billed To", "Md Abu Raihan", "Shimulia,khoksa,", "Kushtia, 7021")
+	_, sy := summaryBlock(pdf, xIndent, bannerHt+lineHt*2.0, "Billed To", customerName, clientAddress)
 	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*2.0, "Invoice Number", "INVSL#0001")
-	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*6.25, "Date of Issue", "05/02/2022")
+
+	time := time.Now().Format("01/02/2006")
+
+	summaryBlock(pdf, xIndent*2.0+lineHt*12.5, bannerHt+lineHt*6.25, "Date of Issue", time)
 
 	// Summary - Invoice Total
 	x, y := w-xIndent-124.0, bannerHt+lineHt*2.25
@@ -144,6 +158,7 @@ func ShowInvoice() {
 	pdf.Line(x+20.0, y, x+220.0, y)
 	y = y + lineHt*0.5
 	_, _ = trailerLine(pdf, x, y, "Total", total)
+	// x, y = trailerLine(pdf, x, y, "Pay", 525)
 
 	pathPrifix, _ := CreateFolderUseingDate()
 	// rand := rand.Intn(99999)

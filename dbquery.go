@@ -147,6 +147,16 @@ func GetPrice(item_name string) []map[string]interface{} {
 	return rows
 }
 
+func GetClientAddress(name string) []map[string]interface{} {
+	// SELECT price FROM item WHERE item_name="Mi Note 9 Pro";
+	qs := fmt.Sprintf("SELECT address FROM client WHERE name='%s';", name)
+	rows, err := msql.GetAllRowsByQuery(qs, db)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return rows
+}
+
 func GetProductName() []string {
 	tableData := []string{}
 	rows, err := GetProduct()

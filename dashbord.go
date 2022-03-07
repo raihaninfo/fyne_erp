@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	"image/color"
 	"strconv"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 )
@@ -56,28 +54,33 @@ func ShowDashbod(a fyne.App) {
 	totalClientCount := strconv.Itoa((len(totalClient) - 1))
 
 	card1 := widget.NewCard(
-		"Total Client",
 		totalClientCount,
-		canvas.NewRectangle(color.Black),
+		"Total Client",
+		widget.NewProgressBarInfinite(),
 	)
 	totalProduct := processAllProductData()
 	totalProductCount := strconv.Itoa((len(totalProduct) - 1))
 	card2 := widget.NewCard(
-		"Total Product",
 		totalProductCount,
-		canvas.NewRectangle(color.White),
+		"Total Product",
+		widget.NewProgressBarInfinite(),
 	)
+
+	splitLeft := container.NewVBox(btn1, btn2, btn3, btn4, btn5, btn6)
+	splitRight := container.NewVBox(container.NewGridWithColumns(2, card1, card2))
+	jj := container.NewHSplit(
+		splitLeft,
+		splitRight,
+	)
+
+	jj.Offset = 0.2
 
 	win.SetContent(
 		container.NewVBox(
 			container.NewGridWithColumns(1,
 				container.NewCenter(headLable),
 			),
-			container.NewGridWithColumns(3,
-				container.NewVBox(btn1, btn2, btn3, btn4, btn5, btn6),
-				container.NewVBox(card1),
-				container.NewVBox(card2),
-			),
+			jj,
 		),
 	)
 

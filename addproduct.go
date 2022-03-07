@@ -1,10 +1,9 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -34,14 +33,14 @@ func ShowProductAdd(a fyne.App) {
 	warrantyEntry := widget.NewCheck("Check if there is a warranty", func(b bool) {})
 
 	// warranty period
-	warrantyPeriod := widget.NewSelect([]string{"10 Days", "30 Days", "3 Month", "6 Month", "1 Year", "2 Years", "Life Time"}, func(s string) {
+	warrantyPeriodEntry := widget.NewSelect([]string{"10 Days", "30 Days", "3 Month", "6 Month", "1 Year", "2 Years", "Life Time"}, func(s string) {
 
 	})
 
 	productName := widget.NewFormItem("Product Name", nameEntry)
 	productPrice := widget.NewFormItem("Product Price", priceEntry)
 	productWarranty := widget.NewFormItem("Product Warranty", warrantyEntry)
-	productWarrantyPeriod := widget.NewFormItem("Warranty Period", warrantyPeriod)
+	productWarrantyPeriod := widget.NewFormItem("Warranty Period", warrantyPeriodEntry)
 	group := widget.NewFormItem("Group", groupEntry)
 
 	// product Form
@@ -55,7 +54,7 @@ func ShowProductAdd(a fyne.App) {
 		name := nameEntry.Text
 		price := priceEntry.Text
 		warranty := warrantyEntry.Checked
-		warrantyPeriod := warrantyPeriod.Selected
+		warrantyPeriod := warrantyPeriodEntry.Selected
 		groupValue := groupEntry.Selected
 
 		isWarranty := "0"
@@ -63,8 +62,19 @@ func ShowProductAdd(a fyne.App) {
 			isWarranty = "1"
 		}
 
-		fmt.Println(warrantyPeriod)
-		AddProduct(name, groupValue, price, isWarranty, warrantyPeriod)
+		if len(name) == 0 || len(price) == 0 || groupValue == "" {
+			dialog.NewInformation("Warning!", "Please Fill All Information", myWindow).Show()
+		} else {
+			AddProduct(name, groupValue, price, isWarranty, warrantyPeriod)
+			nameEntry.Text = ""
+			priceEntry.Text = ""
+			groupEntry.ClearSelected()
+			warrantyPeriodEntry.ClearSelected()
+
+			warrantyEntry.Checked = false
+			productForm.Refresh()
+		}
+
 	}
 
 	productForm.OnCancel = func() {

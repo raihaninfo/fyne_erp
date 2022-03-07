@@ -136,6 +136,13 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	confirmBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	confirmBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, myWindow.Canvas().Size().Height-80))
 
+	cancelBtn := widget.NewButton("Cancel", func() {
+		InvoiceDash(myApp)
+	})
+	cancelBtn.SetIcon(theme.CancelIcon())
+	cancelBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
+	cancelBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/2.7, myWindow.Canvas().Size().Height-80))
+
 	var discountAmount float64
 	var totalAmount float64
 
@@ -154,6 +161,6 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	totalLabel.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5, myWindow.Canvas().Size().Height-100))
 
 	myWindow.SetContent(
-		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn),
+		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn, cancelBtn),
 	)
 }

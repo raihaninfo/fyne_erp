@@ -58,6 +58,7 @@ func ShowDashbod(a fyne.App) {
 		"Total Client",
 		widget.NewProgressBarInfinite(),
 	)
+
 	totalProduct := processAllProductData()
 	totalProductCount := strconv.Itoa((len(totalProduct) - 1))
 	card2 := widget.NewCard(
@@ -68,19 +69,19 @@ func ShowDashbod(a fyne.App) {
 
 	splitLeft := container.NewVBox(btn1, btn2, btn3, btn4, btn5, btn6)
 	splitRight := container.NewVBox(container.NewGridWithColumns(2, card1, card2))
-	jj := container.NewHSplit(
+	split := container.NewHSplit(
 		splitLeft,
 		splitRight,
 	)
 
-	jj.Offset = 0.2
+	split.Offset = 0.2
 
 	win.SetContent(
 		container.NewVBox(
 			container.NewGridWithColumns(1,
 				container.NewCenter(headLable),
 			),
-			jj,
+			split,
 		),
 	)
 

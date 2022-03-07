@@ -1,10 +1,9 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -38,11 +37,15 @@ func ShowAddGroupItem(a fyne.App) {
 	productForm.OnSubmit = func() {
 		product := productGroupNameEntry.Text
 		description := productDec.Text
-		id, err := AddProductGroup(product, description)
-		if err != nil {
-			fmt.Println(err)
+		if len(product) == 0 || len(description) == 0 {
+			dialog.NewInformation("Warning!", "Please Fill All Information", myWindow).Show()
+		} else {
+			AddProductGroup(product, description)
+			productGroupNameEntry.Text = ""
+			productDec.Text = ""
+			productForm.Refresh()
 		}
-		fmt.Println(id)
+
 	}
 
 	win.SetContent(container.NewVBox(btnHead, btnHead1, productForm))

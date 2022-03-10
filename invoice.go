@@ -15,7 +15,7 @@ var totalLabel *widget.Label
 var formDiscount float64
 
 // var clientFullName string
-var mainData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
+var invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
 
 var input *widget.Select
 
@@ -53,7 +53,7 @@ func CreateInvoice(a fyne.App) {
 		dis.OnChanged = func(s string) {
 			am, _ := strconv.ParseFloat(s, 32)
 			formDiscount = am
-			showInvoiceDataOnList(mainData, input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis)
 		}
 		if len(productName) > 0 && len(qt) > 0 {
 			priceMap := GetPrice(productName)
@@ -65,9 +65,9 @@ func CreateInvoice(a fyne.App) {
 			total := priceInt * qtInt
 
 			singleData := []string{productName, qt, pdPrice, fmt.Sprintf("%.0f", total)}
-			mainData = append(mainData, singleData)
+			invoiceData = append(invoiceData, singleData)
 
-			showInvoiceDataOnList(mainData, input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis)
 		} else {
 			dialog.NewInformation("Warning!", "Please Check Product and quantity", myWindow).Show()
 		}
@@ -80,22 +80,22 @@ func CreateInvoice(a fyne.App) {
 	btn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	btn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, 50))
 
-	showInvoiceDataOnList(mainData, input, in1, in2, btn, dis)
+	showInvoiceDataOnList(input, in1, in2, btn, dis)
 	btn.Icon = theme.ContentAddIcon()
 
 	myWindow.Show()
 }
 
-func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button, dis *widget.Entry) {
+func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button, dis *widget.Entry) {
 	list := widget.NewTable(
 		func() (int, int) {
-			return len(mainData), len(mainData[0])
+			return len(invoiceData), len(invoiceData[0])
 		},
 		func() fyne.CanvasObject {
 			return widget.NewLabel("wide content")
 		},
 		func(i widget.TableCellID, o fyne.CanvasObject) {
-			o.(*widget.Label).SetText(mainData[i.Row][i.Col])
+			o.(*widget.Label).SetText(invoiceData[i.Row][i.Col])
 		},
 	)
 
@@ -114,8 +114,8 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 
 	clearBtn := widget.NewButton("Clear", func() {
 		input.ClearSelected()
-		mainData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
-		showInvoiceDataOnList(mainData, input, in1, in2, btn, dis)
+		invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
+		showInvoiceDataOnList(input, in1, in2, btn, dis)
 	})
 	clearBtn.SetIcon(theme.DeleteIcon())
 	clearBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
@@ -124,10 +124,10 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	confirmBtn := widget.NewButton("Confirm", func() {
 		if len(input.Selected) > 0 {
 			ShowInvoice()
-			mainData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
 			input.ClearSelected()
+			invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
 
-			showInvoiceDataOnList(mainData, input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis)
 		} else {
 			dialog.NewInformation("Warning!", "Please Select Client", myWindow).Show()
 		}
@@ -137,7 +137,7 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	confirmBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, myWindow.Canvas().Size().Height-80))
 
 	cancelBtn := widget.NewButton("Cancel", func() {
-		InvoiceDash(myApp)
+		ShowDashbod(myApp)
 	})
 	cancelBtn.SetIcon(theme.CancelIcon())
 	cancelBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
@@ -146,8 +146,8 @@ func showInvoiceDataOnList(mainData [][]string, input *widget.Select, in1 *widge
 	var discountAmount float64
 	var totalAmount float64
 
-	for i := 1; i < len(mainData); i++ {
-		price, _ := strconv.ParseFloat(mainData[i][3], 32)
+	for i := 1; i < len(invoiceData); i++ {
+		price, _ := strconv.ParseFloat(invoiceData[i][3], 32)
 		totalAmount += price
 	}
 	subtotalForm := fmt.Sprintf("Total = %.0f", totalAmount-formDiscount)

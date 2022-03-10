@@ -36,12 +36,12 @@ func ShowInvoice() {
 	discount = formDiscount
 	fmt.Println(formDiscount)
 	var lineItems []LineItem
-	for i := 1; i < len(mainData); i++ {
+	for i := 1; i < len(invoiceData); i++ {
 
-		price, _ := strconv.ParseFloat(mainData[i][2], 32)
-		qty, _ := strconv.Atoi(mainData[i][1])
+		price, _ := strconv.ParseFloat(invoiceData[i][2], 32)
+		qty, _ := strconv.Atoi(invoiceData[i][1])
 		tmp := LineItem{
-			UnitName:       mainData[i][0],
+			UnitName:       invoiceData[i][0],
 			PricePerUnit:   price,
 			UnitsPurchased: qty,
 		}

@@ -66,6 +66,27 @@ func AddProductGroup(group_name, description string) (int64, error) {
 	return pid, nil
 }
 
+func AddInvoiceInfo(client_name, invoice_number, invoice_total, invoice_date, total_price, due, due_amount string) (int64, error) {
+	data := make(url.Values)
+	data.Set("table", "invoice")
+	data.Set("dbtype", "sqlite3")
+	data.Set("client_name", client_name)
+	data.Set("invoice_number", invoice_number)
+	data.Set("invoice_total", invoice_total)
+	data.Set("invoice_date", invoice_date)
+	data.Set("total_price", total_price)
+	data.Set("due", due)
+	data.Set("due_amount", due_amount)
+
+	pid, err := msql.InsertIntoAnyTable(data, db)
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+	fmt.Println("Successfully inserted", pid)
+	return pid, nil
+}
+
 // get client query
 func GetClient() ([]map[string]interface{}, error) {
 	qs := "SELECT * FROM client;"

@@ -4,7 +4,7 @@
 
 ![login](img/1.png)
 
-## Dashbord
+## Dashboard
 
 ![](img/2.png)
 

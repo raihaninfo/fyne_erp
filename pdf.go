@@ -184,9 +184,9 @@ func trailerLine(pdf *gofpdf.Fpdf, x, y float64, label string, amount float64) (
 	return origX, y
 }
 
-func toBDT(poisa float64) string {
-	rountPaisa := math.Round(poisa)
-	return fmt.Sprintf("TK %.0f", rountPaisa)
+func toBDT(poisha float64) string {
+	roundPaisa := math.Round(poisha)
+	return fmt.Sprintf("TK %.0f", roundPaisa)
 }
 
 func lineItem(pdf *gofpdf.Fpdf, x, y float64, lineItem LineItem) (float64, float64) {

@@ -6,7 +6,7 @@ func dataConveter(input interface{}) string {
 	return fmt.Sprintf("%v", input)
 }
 
-// is company table emty, replease with old data
+// is company table empty, replease with old data
 func isEmpty(item, value string) (string, error) {
 	companyInfo, err := GetCompanyInfo("1")
 	if err != nil {

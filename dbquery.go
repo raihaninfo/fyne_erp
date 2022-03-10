@@ -105,8 +105,8 @@ func GetCompanyInfo(id string) (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	for _, srow := range rows {
-		row = srow
+	for _, sRow := range rows {
+		row = sRow
 	}
 	return row, nil
 }

@@ -8,7 +8,7 @@ import (
 
 func ShowData(a fyne.App) {
 	win := myWindow
-	btnHead := widget.NewButton("< Back to Dashbord", func() {
+	btnHead := widget.NewButton("< Back to Dashboard", func() {
 		ShowDashbod(myApp)
 	})
 	searchEntry := widget.NewEntry()

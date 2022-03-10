@@ -9,7 +9,7 @@ import (
 
 func ShowProductAdd(a fyne.App) {
 	win := myWindow
-	btnHead := widget.NewButton("Dashbord", func() {
+	btnHead := widget.NewButton("Dashboard", func() {
 		ShowDashbod(myApp)
 	})
 

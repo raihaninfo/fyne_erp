@@ -156,6 +156,11 @@ func ShowInvoice() {
 	y = y + lineHt*0.5
 	_, _ = trailerLine(pdf, x, y, "Total", total)
 	// x, y = trailerLine(pdf, x, y, "Pay", 525)
+	y = y + lineHt*1.2
+	_, _ = trailerLine(pdf, x, y, "Pay", 5)
+
+	y = y + lineHt*1.7
+	_, _ = trailerLine(pdf, x, y, "Due", 10)
 
 	pathPrefix, _ := CreateFolderUseingDate()
 	// rand := rand.Intn(99999)

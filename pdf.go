@@ -151,15 +151,16 @@ func ShowInvoice() {
 	x, y = w/1.75, y+lineHt*2.25
 	x, y = trailerLine(pdf, x, y, "Subtotal", subtotal)
 	x, y = trailerLine(pdf, x, y, "Discount", discount)
-	pdf.SetDrawColor(255, 255, 180)
+	pdf.SetDrawColor(92, 90, 84)
 	pdf.Line(x+20.0, y, x+220.0, y)
 	y = y + lineHt*0.5
 	_, _ = trailerLine(pdf, x, y, "Total", total)
 	// x, y = trailerLine(pdf, x, y, "Pay", 525)
 	y = y + lineHt*1.2
 	_, _ = trailerLine(pdf, x, y, "Pay", 5)
-
-	y = y + lineHt*1.7
+	y = y + lineHt*1.5
+	pdf.SetDrawColor(92, 90, 84)
+	pdf.Line(x+20.0, y, x+220.0, y)
 	_, _ = trailerLine(pdf, x, y, "Due", 10)
 
 	pathPrefix, _ := CreateFolderUseingDate()

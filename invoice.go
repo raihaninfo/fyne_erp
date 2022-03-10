@@ -42,8 +42,13 @@ func CreateInvoice(a fyne.App) {
 
 	dis := widget.NewEntry()
 	dis.PlaceHolder = "Discount Amount"
-	dis.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/4, 40))
+	dis.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	dis.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-120))
+
+	payBill := widget.NewEntry()
+	payBill.PlaceHolder = "Pay Amount"
+	payBill.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
+	payBill.Move(fyne.NewPos(0, myWindow.Canvas().Size().Height-80))
 
 	btn = widget.NewButton("Add", func() {
 		productName := in1.Selected
@@ -52,7 +57,7 @@ func CreateInvoice(a fyne.App) {
 		dis.OnChanged = func(s string) {
 			am, _ := strconv.ParseFloat(s, 32)
 			formDiscount = am
-			showInvoiceDataOnList(input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis, payBill)
 		}
 		if len(productName) > 0 && len(qt) > 0 {
 			priceMap := GetPrice(productName)
@@ -66,7 +71,7 @@ func CreateInvoice(a fyne.App) {
 			singleData := []string{productName, qt, pdPrice, fmt.Sprintf("%.0f", total)}
 			invoiceData = append(invoiceData, singleData)
 
-			showInvoiceDataOnList(input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis, payBill)
 		} else {
 			dialog.NewInformation("Warning!", "Please Check Product and quantity", myWindow).Show()
 		}
@@ -79,13 +84,13 @@ func CreateInvoice(a fyne.App) {
 	btn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	btn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, 50))
 
-	showInvoiceDataOnList(input, in1, in2, btn, dis)
+	showInvoiceDataOnList(input, in1, in2, btn, dis, payBill)
 	btn.Icon = theme.ContentAddIcon()
 
 	myWindow.Show()
 }
 
-func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button, dis *widget.Entry) {
+func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget.Entry, btn *widget.Button, dis *widget.Entry, payBill *widget.Entry) {
 	list := widget.NewTable(
 		func() (int, int) {
 			return len(invoiceData), len(invoiceData[0])
@@ -114,7 +119,7 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	clearBtn := widget.NewButton("Clear", func() {
 		input.ClearSelected()
 		invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
-		showInvoiceDataOnList(input, in1, in2, btn, dis)
+		showInvoiceDataOnList(input, in1, in2, btn, dis, payBill)
 	})
 	clearBtn.SetIcon(theme.DeleteIcon())
 	clearBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
@@ -125,7 +130,7 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 			ShowInvoice()
 			input.ClearSelected()
 			invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
-			showInvoiceDataOnList(input, in1, in2, btn, dis)
+			showInvoiceDataOnList(input, in1, in2, btn, dis, payBill)
 		} else {
 			dialog.NewInformation("Warning!", "Please Select Client", myWindow).Show()
 		}
@@ -159,6 +164,6 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	totalLabel.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5, myWindow.Canvas().Size().Height-100))
 
 	myWindow.SetContent(
-		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn, cancelBtn),
+		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn, cancelBtn, payBill),
 	)
 }

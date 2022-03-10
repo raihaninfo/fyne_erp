@@ -18,7 +18,6 @@ func mainMenu() {
 	menuItem3 := fyne.NewMenuItem("About", func() {
 		dialog := dialog.NewInformation("About", "This is simply dummy text of the printing\n and typesetting industry. dummy text has been the industry's standard\n dummy text ever since the 1500s, ", myWindow)
 		dialog.Show()
-
 	})
 	menuItem4 := fyne.NewMenuItem("Company Info", func() {
 		CompanyInfoUpdate(myApp)

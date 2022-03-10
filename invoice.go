@@ -14,7 +14,6 @@ import (
 var totalLabel *widget.Label
 var formDiscount float64
 
-// var clientFullName string
 var invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
 
 var input *widget.Select
@@ -126,7 +125,6 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 			ShowInvoice()
 			input.ClearSelected()
 			invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
-
 			showInvoiceDataOnList(input, in1, in2, btn, dis)
 		} else {
 			dialog.NewInformation("Warning!", "Please Select Client", myWindow).Show()

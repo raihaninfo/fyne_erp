@@ -25,8 +25,6 @@ type LineItem struct {
 var subtotal float64
 var customerName string
 
-// var clientAddress string
-
 func ShowInvoice() {
 	customerName = input.Selected
 
@@ -37,7 +35,6 @@ func ShowInvoice() {
 	fmt.Println(formDiscount)
 	var lineItems []LineItem
 	for i := 1; i < len(invoiceData); i++ {
-
 		price, _ := strconv.ParseFloat(invoiceData[i][2], 32)
 		qty, _ := strconv.Atoi(invoiceData[i][1])
 		tmp := LineItem{
@@ -160,10 +157,10 @@ func ShowInvoice() {
 	_, _ = trailerLine(pdf, x, y, "Total", total)
 	// x, y = trailerLine(pdf, x, y, "Pay", 525)
 
-	pathPrifix, _ := CreateFolderUseingDate()
+	pathPrefix, _ := CreateFolderUseingDate()
 	// rand := rand.Intn(99999)
 	rand := "jjj"
-	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrifix, rand)
+	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrefix, rand)
 
 	err := pdf.OutputFileAndClose(folderPath)
 	if err != nil {

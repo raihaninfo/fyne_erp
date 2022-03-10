@@ -12,6 +12,7 @@ func InvoiceDash(a fyne.App) {
 	btn1 := widget.NewButton("Back", func() {
 		ShowDashbod(myApp)
 	})
+	
 	btn2 := widget.NewButton("Create Invoice", func() {
 		CreateInvoice(myApp)
 	})

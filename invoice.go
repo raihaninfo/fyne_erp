@@ -139,6 +139,13 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	confirmBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	confirmBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, myWindow.Canvas().Size().Height-80))
 
+	backBtn := widget.NewButton("Back", func() {
+		InvoiceDash(myApp)
+	})
+	backBtn.SetIcon(theme.NavigateBackIcon())
+	backBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
+	backBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/2.7, myWindow.Canvas().Size().Height-130))
+
 	cancelBtn := widget.NewButton("Cancel", func() {
 		ShowDashbod(myApp)
 	})
@@ -164,6 +171,6 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	totalLabel.Move(fyne.NewPos(myWindow.Canvas().Size().Width/2.5, myWindow.Canvas().Size().Height-100))
 
 	myWindow.SetContent(
-		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn, cancelBtn, payBill),
+		container.NewWithoutLayout(input, in1, in2, btn, list, dis, disLabel, totalLabel, confirmBtn, clearBtn, cancelBtn, payBill, backBtn),
 	)
 }

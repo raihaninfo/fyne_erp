@@ -24,12 +24,13 @@ func ShowDashbod(a fyne.App) {
 
 	welcome := fmt.Sprintf("Welcome to %s", comName)
 	onlineInfo := fmt.Sprintf("%s, %s, %s", comWeb, comEmail, comMobile)
-	headLable := widget.NewCard(
+	// widget.Label
+	headLabel := widget.NewCard(
 		welcome,
 		dataConveter(comAddress),
 		widget.NewLabel(onlineInfo),
 	)
-	headLable.Refresh()
+	headLabel.Refresh()
 
 	btn1 := widget.NewButton("Add New Client", func() {
 		ShowClient(myApp)
@@ -79,7 +80,7 @@ func ShowDashbod(a fyne.App) {
 	win.SetContent(
 		container.NewVBox(
 			container.NewGridWithColumns(1,
-				container.NewCenter(headLable),
+				container.NewCenter(headLabel),
 			),
 			split,
 		),

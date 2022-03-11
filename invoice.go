@@ -149,6 +149,11 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	cancelBtn := widget.NewButton("Cancel", func() {
 		ShowDashbod(myApp)
 	})
+
+	// cancelBtn.Importance = 1
+
+
+
 	cancelBtn.SetIcon(theme.CancelIcon())
 	cancelBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	cancelBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/2.7, myWindow.Canvas().Size().Height-80))

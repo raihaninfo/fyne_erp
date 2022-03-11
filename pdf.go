@@ -51,7 +51,7 @@ func ShowInvoice() {
 
 	pdf := gofpdf.New(gofpdf.OrientationPortrait, gofpdf.UnitPoint, gofpdf.PageSizeLetter, "")
 	w, h := pdf.GetPageSize()
-	fmt.Printf("width=%v, height=%v\n", w, h)
+	// fmt.Printf("width=%v, height=%v\n", w, h)
 	pdf.AddPage()
 
 	// Top Maroon Banner
@@ -165,12 +165,12 @@ func ShowInvoice() {
 
 	pathPrefix, _ := CreateFolderUseingDate()
 	// rand := rand.Intn(99999)
-	rand := "jjj"
-	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrefix, rand)
+	fileName := "pdf1"
+	folderPath := fmt.Sprintf("pdf/%v/%v.pdf", pathPrefix, fileName)
 
 	err := pdf.OutputFileAndClose(folderPath)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
 

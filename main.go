@@ -43,9 +43,12 @@ func main() {
 		appEmail := ""
 		appPass := ""
 		if emailEntry.Text == appEmail && passwordEntry.Text == appPass {
+
+			app.New().SendNotification(fyne.NewNotification("congratulations", "You have logind"))
 			ShowDashbod(myApp)
 		} else {
-			dialog.NewInformation("Invalid Email or password", "Email or Passwor invalid", myWindow).Show()
+			app.New().SendNotification(fyne.NewNotification("Invalid Email Or Password", "Email or Password invalid"))
+			dialog.NewInformation("Invalid Email or password", "Email or Password invalid", myWindow).Show()
 		}
 
 	}

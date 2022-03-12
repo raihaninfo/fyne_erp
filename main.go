@@ -12,7 +12,7 @@ import (
 
 var (
 	myApp    fyne.App    = app.New()
-	myWindow fyne.Window = myApp.NewWindow("Mini ERP v0.0.1")
+	myWindow fyne.Window = myApp.NewWindow("Mini ERP v1.0")
 	db       *sql.DB
 	err      error
 )

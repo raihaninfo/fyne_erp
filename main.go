@@ -19,7 +19,7 @@ var (
 
 // Database connection.
 func init() {
-	dbcon()
+	dbConnection()
 }
 
 func main() {

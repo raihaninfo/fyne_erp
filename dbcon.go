@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func dbcon() {
+func dbConnection() {
 	// Connect to database
 	db, err = sql.Open("sqlite3", "./minierp.db")
 	if err != nil {

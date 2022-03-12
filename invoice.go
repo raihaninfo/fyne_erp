@@ -124,7 +124,6 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	clearBtn.SetIcon(theme.DeleteIcon())
 	clearBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
 	clearBtn.Move(fyne.NewPos(myWindow.Canvas().Size().Width-myWindow.Canvas().Size().Width/5.5, myWindow.Canvas().Size().Height-130))
-
 	confirmBtn := widget.NewButton("Confirm", func() {
 		if len(input.Selected) > 0 {
 			ShowInvoice()

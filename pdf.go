@@ -14,16 +14,17 @@ const (
 	xIndent  = 40.0
 )
 
-var discount float64
+var (
+	discount     float64
+	subtotal     float64
+	customerName string
+)
 
 type LineItem struct {
 	UnitName       string
 	PricePerUnit   float64
 	UnitsPurchased int
 }
-
-var subtotal float64
-var customerName string
 
 func ShowInvoice() {
 	customerName = input.Selected

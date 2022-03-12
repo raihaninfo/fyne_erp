@@ -11,12 +11,12 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-var totalLabel *widget.Label
-var formDiscount float64
-
-var invoiceData = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
-
-var input *widget.Select
+var (
+	totalLabel   *widget.Label
+	formDiscount float64
+	invoiceData  = [][]string{{"Product Name", "QT", "Price PerUnit", "Total"}}
+	input        *widget.Select
+)
 
 func CreateInvoice(a fyne.App) {
 	clientName := GetClientName()
@@ -151,8 +151,6 @@ func showInvoiceDataOnList(input *widget.Select, in1 *widget.Select, in2 *widget
 	})
 
 	// cancelBtn.Importance = 1
-
-
 
 	cancelBtn.SetIcon(theme.CancelIcon())
 	cancelBtn.Resize(fyne.NewSize(myWindow.Canvas().Size().Width/5.5, 40))
